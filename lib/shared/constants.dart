@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 
 
-
+const Color pink = Color(0xffFE4775);
 Box? studentBox;
 String? lang;
 String? defaultLang;

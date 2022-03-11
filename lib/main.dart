@@ -8,6 +8,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:todo/cubit/bloc_observer.dart';
 import 'package:todo/screens/home/home_screen.dart';
+import 'package:todo/screens/opening/opening_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/themes.dart';
 import 'package:todo/translations/translation.dart';
@@ -21,9 +22,9 @@ void main() async{
   /// get device language
   final String defaultLocale = Platform.localeName.substring(0,2);
   defaultLang = defaultLocale;
-  await Hive.initFlutter();
+  //await Hive.initFlutter();
   //Hive.registerAdapter(StudentModelAdapter());
-  studentBox = await Hive.openBox("students");
+  //studentBox = await Hive.openBox("students");
   runApp(const MyApp());
 }
 
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
               ar: TextDirection.rtl,
               en: TextDirection.ltr
           ),
-          child: const HomeScreen()
+          child: const OpeningScreen()
       ),
       theme: lightTheme,
       darkTheme: darkTheme,

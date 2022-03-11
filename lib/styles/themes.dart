@@ -13,13 +13,15 @@ ThemeData darkTheme=ThemeData(
     textTheme: TextTheme(
         bodyText1:const TextStyle(
           color: Colors.white,
-          fontWeight: FontWeight.w600,
-          fontSize: 24,
+          //fontWeight: FontWeight.w600,
+          fontFamily: "Avenir-Medium",
+          fontSize: 20,
         ),
         bodyText2: const TextStyle(
           color: Colors.white,
-          fontWeight: FontWeight.w200,
-          fontSize: 15,
+          fontFamily: "Avenir-Black",
+          //fontWeight: FontWeight.w200,
+          fontSize: 20,
         ),
         caption: TextStyle(
             color: Colors.white.withOpacity(0.5)
@@ -68,14 +70,16 @@ ThemeData lightTheme=ThemeData(
     ),
     textTheme: const TextTheme(
       bodyText1:TextStyle(
-        color: Colors.black87,
-        fontWeight: FontWeight.w600,
-        fontSize: 24,
+        color: Colors.black,
+        //fontWeight: FontWeight.w600,
+        fontFamily: "Avenir-Medium",
+        fontSize: 20,
       ),
       bodyText2: TextStyle(
-        color: Colors.black87,
-        fontWeight: FontWeight.w200,
-        fontSize: 15,
+        color: Colors.black,
+        fontFamily: "Avenir-Black",
+        //fontWeight: FontWeight.w200,
+        fontSize: 20,
       ),
     ),
     appBarTheme: const AppBarTheme(
