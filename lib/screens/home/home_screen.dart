@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todo/screens/add_task/add_task_screen.dart';
 import 'package:todo/screens/home/home_items/home_head.dart';
 import 'package:todo/screens/home/home_items/show_tasks.dart';
 import 'package:todo/screens/home/home_items/tasks_schedules.dart';
@@ -28,26 +30,12 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        onPressed: (){Get.to(()=>const AddTaskScreen());},
         backgroundColor: pink,
         elevation: 0,
-        onPressed: (){},
         child: const Icon(Icons.add,),
         shape:  const RoundedRectangleBorder(),
       ),
     );
   }
 }
-// ElevatedButton(
-// onPressed:(){},
-// child:const Icon(IconBroken.Edit,color: Colors.white,size: 25,),
-// style: ElevatedButton.styleFrom(
-// elevation: 0,
-// primary:pink,
-// shape: const RoundedRectangleBorder(
-// borderRadius:BorderRadius.only(
-// topLeft: Radius.circular(5)
-// ),
-// ),
-// minimumSize: const Size(70,60)
-// ),
-// ),

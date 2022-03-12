@@ -195,87 +195,91 @@ class DefaultSeparator extends StatelessWidget {
 class DefaultTextFormFiled extends StatelessWidget{
   final TextEditingController? controller;
   final Color? textColor;
+  final double textSize;
   final TextInputType? inputType;
-  final IconData? prefixIcon;
-  final String? label;
-  final Color? borderColor;
-  final Color? preIconColor;
+  final String? hint;
+  final Color? hintColor;
+  final Color focusBorder;
+  final Color border;
   final String? validateText;
-  double? height;
+  final double rounded;
+  Widget? prefix;
+  Widget? suffix;
+  double? heightPadding;
+  double? widthPadding;
   double? cursorHeight;
-  Color? suffixIconColor;
   bool? isPassword;
-  // Function? onSubmit(value)?;
-  // Function? onChanged(value)?;
-  Function? suffixPressed;
-  IconData? suffixIcon;
+
+
 
   DefaultTextFormFiled({Key? key,
     required this.controller,
     required this.textColor,
     required this.inputType,
-    required this.prefixIcon,
-    required this.label,
-    required this.borderColor,
-    required this.preIconColor,
-    this.validateText, this.cursorHeight,
-    this.height,this.isPassword,
-    this.suffixIcon,this.suffixIconColor,this.suffixPressed}
+    required this.hint,
+    required this.hintColor,
+    required this.rounded,
+    required this.focusBorder,
+    required this.border,
+    required this.textSize,
+    this.isPassword,
+    this.validateText,
+    this.cursorHeight,
+    this.heightPadding,
+    this.widthPadding,
+    this.suffix,
+    this.prefix,
+  }
       ) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: textColor,
+      cursorColor: focusBorder,
       validator: (value) {
         if (value!.isEmpty) {
           return "$validateText can't be empty";
         }
         return null;
       },
-      style: TextStyle(
-        color: textColor,
+      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+          color: textColor,
+          fontSize: textSize
       ),
       cursorHeight: cursorHeight,
       keyboardType: inputType,
       obscureText: isPassword==null?false:isPassword!,
-      //onFieldSubmitted: (value) => onSubmit!(value),
-      //onChanged: (value)=>onChanged!(value),
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: height==null?18:height!),
-        prefixIcon: Icon(
-          prefixIcon,
-          color: preIconColor,
+        hintText: hint!,
+        hintStyle: TextStyle(
+          color: hintColor
         ),
-        //hintText: "ASD",
-        suffixIcon:suffixIcon!=null? IconButton(
-          onPressed: () => suffixPressed!(),
-          icon: Icon(suffixIcon),
-          color: suffixIconColor,
-          //focusColor: suffixIconColor,
-        ):null,
+        contentPadding: EdgeInsets.symmetric(vertical: heightPadding==null?18:heightPadding!,
+        horizontal: widthPadding==null?10:widthPadding!),
+        prefixIcon: prefix,
+        suffixIcon: suffix,
         focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(rounded),
             borderSide: const BorderSide(
               color: Colors.red,
             )),
         errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(rounded),
             borderSide: const BorderSide(
               color: Colors.red,
             )),
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(rounded),
             borderSide: BorderSide(
-              color: borderColor!,
+              color: border,
             )),
         focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(rounded),
             borderSide: BorderSide(
-              color: borderColor!,
+              color: focusBorder,
             )),
-        labelText: label,
+        //labelText: label,
         labelStyle: TextStyle(
           color: textColor,
         ),

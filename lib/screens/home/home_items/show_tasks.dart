@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/shared/constants.dart';
-import 'package:todo/shared/default_widgets.dart';
-import 'package:todo/styles/icons_broken.dart';
+
 
 class TaskText extends StatelessWidget {
   final String text;

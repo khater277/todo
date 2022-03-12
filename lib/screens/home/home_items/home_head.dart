@@ -25,7 +25,7 @@ class HomeHead extends StatelessWidget {
                 Text("Tasks",
                   style: Theme.of(context)
                       .textTheme
-                      .bodyText1!
+                      .bodyText2!
                       .copyWith(fontSize: 45),
 
                 ),
