@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'package:todo/screens/add_task/add_task_screen.dart';
-import 'package:todo/screens/home/home_items/home_head.dart';
-import 'package:todo/screens/home/home_items/show_tasks.dart';
-import 'package:todo/screens/home/home_items/tasks_schedules.dart';
+import 'package:todo/screens/drawer/drawer_screen.dart';
+import 'package:todo/screens/main/main_screen.dart';
 import 'package:todo/shared/constants.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,31 +11,29 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 80),
-        child: Column(
-          children: [
-            const HomeHead(),
-            Expanded(
-              child: Row(
-                children: const [
-                  TasksSchedules(),
-                  ShowTasks(),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){Get.to(()=>const AddTaskScreen());},
-        backgroundColor: pink,
-        elevation: 0,
-        child: const Icon(Icons.add,),
-        shape:  const RoundedRectangleBorder(),
+    return WillPopScope(
+      onWillPop: () async{
+        zoomDrawerController.close!();
+        return false;
+      },
+      child: ZoomDrawer(
+          controller: zoomDrawerController,
+          borderRadius: 24,
+          style: DrawerStyle.Style1,
+          openCurve: Curves.decelerate,
+          closeCurve: Curves.decelerate,
+          disableGesture: false,
+          mainScreenTapClose: false,
+          slideWidth: MediaQuery.of(context).size.width * 0.68,
+          duration: const Duration(milliseconds: 500),
+          backgroundColor: Colors.white,
+          showShadow: true,
+          angle: 0.0,
+          clipMainScreen: true,
+          mainScreen: const MainScreen(),
+          menuScreen: const DrawerScreen()
       ),
     );
   }
 }
+

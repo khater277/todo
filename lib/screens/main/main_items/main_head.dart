@@ -11,13 +11,6 @@ class HomeHead extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
-            onTap: (){},
-            child: const ImageIcon(
-              AssetImage("assets/images/menu.png"),
-              size: 25,
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: Row(

@@ -12,14 +12,13 @@ class ScheduleText extends StatelessWidget {
         turns: const AlwaysStoppedAnimation(-90 / 360),
         child: Text(text,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              fontSize: 14,
-              color: color,
+            fontSize: 14,
+            color: color,
             //letterSpacing: 1
           ),)
     );
   }
 }
-
 
 class TasksSchedules extends StatelessWidget {
   const TasksSchedules({Key? key}) : super(key: key);

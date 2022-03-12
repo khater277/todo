@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:hive/hive.dart';
 
@@ -9,6 +10,7 @@ const Color blue = Color(0xff161060);
 Box? studentBox;
 String? lang;
 String? defaultLang;
+ZoomDrawerController zoomDrawerController = ZoomDrawerController();
 
 void printError(String? funName,String? error){
   debugPrint("error in $funName ====> $error");
