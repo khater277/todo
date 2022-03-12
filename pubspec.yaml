@@ -96,12 +96,10 @@ flutter:
     - family: Avenir-Medium
       fonts:
         - asset: assets/fonts/Avenir-Medium.ttf
-          weight: 600
 
     - family: Avenir-Black
       fonts:
         - asset: assets/fonts/Avenir-Black.ttf
-          weight: 600
 
     - family: IconBroken
       fonts:

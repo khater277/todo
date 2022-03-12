@@ -60,7 +60,6 @@ ThemeData darkTheme=ThemeData(
 );
 
 ThemeData lightTheme=ThemeData(
-    fontFamily: 'SF-Pro-Display',
     scaffoldBackgroundColor: Colors.white,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.black87,
@@ -70,13 +69,13 @@ ThemeData lightTheme=ThemeData(
     ),
     textTheme: const TextTheme(
       bodyText1:TextStyle(
-        color: Colors.black,
+        color: Colors.black87,
         //fontWeight: FontWeight.w600,
         fontFamily: "Avenir-Medium",
         fontSize: 20,
       ),
       bodyText2: TextStyle(
-        color: Colors.black,
+        color: Colors.black87,
         fontFamily: "Avenir-Black",
         //fontWeight: FontWeight.w200,
         fontSize: 20,
