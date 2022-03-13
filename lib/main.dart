@@ -10,6 +10,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:todo/cubit/bloc_observer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
+import 'package:todo/screens/calendar/calendar_screen.dart';
 import 'package:todo/screens/home/home_screen.dart';
 import 'package:todo/screens/opening/opening_screen.dart';
 import 'package:todo/shared/constants.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
             home: Directionality(
                 textDirection:
                     languageFun(ar: TextDirection.rtl, en: TextDirection.ltr),
-                child: const HomeScreen()),
+                child: const OpeningScreen()),
             theme: lightTheme,
             darkTheme: darkTheme,
             themeMode: ThemeMode.light,

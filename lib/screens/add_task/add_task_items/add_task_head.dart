@@ -16,7 +16,7 @@ class AddTaskHead extends StatelessWidget {
         children: [
           const SizedBox(height: 80,),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 60),
+            padding: const EdgeInsets.symmetric(vertical: 20),
             child: Text("Add New",
               style: Theme.of(context)
                   .textTheme
@@ -25,7 +25,9 @@ class AddTaskHead extends StatelessWidget {
             ),
           ),
           DefaultTextFormFiled(
+            formatters: [NoLeadingSpaceFormatter()],
                 controller: taskController,
+                validateText: "Please add task first",
                 heightPadding: 20,
                 widthPadding: 15,
                 textColor: blue,

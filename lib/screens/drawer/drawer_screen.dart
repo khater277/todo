@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todo/screens/calendar/calendar_screen.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 // ignore: must_be_immutable
@@ -48,7 +50,7 @@ class DrawerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo.shade500,
+      backgroundColor: Colors.grey.shade900,
       body: Padding(
         padding: const EdgeInsets.only(top: 120,left: 20),
         child: Column(
@@ -64,7 +66,10 @@ class DrawerScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30,),
             DrawerItem(text: "Dashboard",icon: IconBroken.Category,),
-            DrawerItem(text: "Calender",icon: IconBroken.Calendar,),
+            GestureDetector(
+              onTap: (){Get.to(()=>const CalendarScreen());},
+                child: DrawerItem(text: "Calender",icon: IconBroken.Calendar,)
+            ),
             DrawerItem(text: "Categorize Tasks",icon: IconBroken.Document,),
             DrawerItem(text: "Setting",icon: IconBroken.Setting,),
             const SizedBox(height: 30,),

@@ -34,15 +34,14 @@ dependencies:
   get: ^4.6.1
   get_storage: ^2.0.3
   hexcolor: ^2.0.5
-  smooth_page_indicator: ^1.0.0+2
   progress_indicators: ^1.0.0
-  permission_handler: ^8.2.6
   device_preview: ^1.0.0
   responsive_framework: ^0.1.5
   hive: ^2.0.6
   hive_flutter: ^1.1.0
   syncfusion_flutter_datepicker: ^19.4.55
   flutter_zoom_drawer: ^2.3.1+1
+  day_night_time_picker: ^1.0.5
 
 
 

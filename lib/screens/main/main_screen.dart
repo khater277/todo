@@ -56,7 +56,7 @@ class MainScreen extends StatelessWidget {
           onPressed: () {
             Get.to(() => const AddTaskScreen());
           },
-          backgroundColor: pink,
+          backgroundColor: Colors.black87,
           elevation: 0,
           child: const Icon(
             Icons.add,

@@ -203,6 +203,8 @@ class DefaultTextFormFiled extends StatelessWidget{
   final Color border;
   final String? validateText;
   final double rounded;
+  final List<TextInputFormatter> formatters;
+  bool? autoFocus;
   Widget? prefix;
   Widget? suffix;
   double? heightPadding;
@@ -222,6 +224,8 @@ class DefaultTextFormFiled extends StatelessWidget{
     required this.focusBorder,
     required this.border,
     required this.textSize,
+    required this.formatters,
+    this.autoFocus,
     this.isPassword,
     this.validateText,
     this.cursorHeight,
@@ -235,11 +239,17 @@ class DefaultTextFormFiled extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      inputFormatters: formatters,
+      autofocus: autoFocus??false,
       controller: controller,
       cursorColor: focusBorder,
       validator: (value) {
         if (value!.isEmpty) {
-          return "$validateText can't be empty";
+          if(validateText!=null) {
+            return validateText!;
+          } else {
+            return "can't be empty";
+          }
         }
         return null;
       },

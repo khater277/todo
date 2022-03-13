@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
+import 'package:todo/shared/date_format.dart';
+import 'package:todo/shared/default_widgets.dart';
+import 'package:day_night_time_picker/day_night_time_picker.dart';
+import 'package:day_night_time_picker/lib/constants.dart';
+
 
 class WhenTask extends StatelessWidget {
-  const WhenTask({Key? key}) : super(key: key);
+  final TodoCubit cubit;
+  const WhenTask({Key? key, required this.cubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +39,48 @@ class WhenTask extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const TaskTime(text: "Today",color: pink,),
-                    TaskTime(text: "Tomorrow",color: Colors.grey.withOpacity(0.8),),
-                    TaskTime(text: "Select Date",color: Colors.grey.withOpacity(0.8),),
+                    GestureDetector(
+                      onTap: (){cubit.setWhenColor(0);},
+                        child: TaskDate(
+                          text: "Today",color: cubit.currentIndex==0?
+                        pink:Colors.grey.withOpacity(0.8),
+                        )
+                    ),
+                    GestureDetector(
+                      onTap: (){cubit.setWhenColor(1);},
+                        child: TaskDate(
+                          text: "Tomorrow",color: cubit.currentIndex==1?
+                        pink:Colors.grey.withOpacity(0.8),
+                        )
+                    ),
+                    GestureDetector(
+                      onTap: (){cubit.setWhenColor(2);},
+                        child: TaskDate(
+                          text: "Select Date",color: cubit.currentIndex==2?
+                          pink:Colors.grey.withOpacity(0.8),
+                        )
+                    ),
                   ],
                 ),
               ),
+            ),
+            const SizedBox(height: 10,),
+            Row(
+              children: [
+                Expanded(
+                    child: cubit.taskDateTime!=null?
+                    Text(
+                      DateFormatter()
+                          .dateFormat(cubit.taskDateTime!.toString())!['date']!,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                        fontSize: 16,
+                        letterSpacing: 1,
+                        color: pink
+                      ),
+                    ):const Text(""),
+                ),
+                TimeButton(cubit: cubit),
+              ],
             )
           ],
         ),
@@ -46,10 +89,10 @@ class WhenTask extends StatelessWidget {
   }
 }
 
-class TaskTime extends StatelessWidget {
+class TaskDate extends StatelessWidget {
   final String text;
   final Color color;
-  const TaskTime({Key? key, required this.text, required this.color}) : super(key: key);
+  const TaskDate({Key? key, required this.text, required this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,5 +102,57 @@ class TaskTime extends StatelessWidget {
         color: color,
         letterSpacing: 1,
       ),);
+  }
+}
+
+class TimeButton extends StatelessWidget {
+  final TodoCubit cubit;
+  const TimeButton({Key? key, required this.cubit}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 5,left: 20),
+      child: DefaultElevatedButton(
+          child: Text(
+            "Time",
+            style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                color: Colors.white,
+                fontSize: 16
+            ),
+          ),
+          color: Colors.black87,
+          rounded: 20,
+          height: 40,
+          width: 120,
+          onPressed: (){
+            FocusScope.of(context).unfocus();
+            Navigator.of(context).push(
+              showPicker(
+                context: context,
+                accentColor: blue,
+                unselectedColor: blue.withOpacity(0.3),
+                value: TimeOfDay.now(),
+                onChange: (value){},
+                //iosStylePicker: true,
+                minuteInterval: MinuteInterval.FIVE,
+                // Optional onChange to receive value as DateTime
+                onChangeDateTime: (DateTime dateTime) {
+                  //print(dateTime);
+                  cubit.setTaskTime(dateTime);
+                },
+                okStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
+                  fontSize: 16,
+                  color: blue,
+                ),
+                cancelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  fontSize: 16,
+                  color: blue,
+                ),
+              ),
+            );
+          }
+      ),
+    );
   }
 }

@@ -52,6 +52,8 @@ class ShowTasks extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
               itemBuilder:(context,index)=> Column(
                 children: [
+                  if(index==0)
+                    const SizedBox(height: 10,),
                   TaskText(
                       text: "Book appointment with doctor ragab",
                       isDone: index==0?true:false),

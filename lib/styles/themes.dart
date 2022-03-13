@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:todo/shared/constants.dart';
 
 ThemeData darkTheme=ThemeData(
     fontFamily: 'SF-Pro-Display',
@@ -60,6 +61,7 @@ ThemeData darkTheme=ThemeData(
 );
 
 ThemeData lightTheme=ThemeData(
+  primarySwatch: GenerateMaterialColor().generateMaterialColor(pink),
     scaffoldBackgroundColor: Colors.white,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.black87,

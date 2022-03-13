@@ -9,3 +9,9 @@ class TodoErrorState extends TodoStates{
 
   TodoErrorState(this.error);
 }
+
+class TodoSetTaskTimeState extends TodoStates{}
+
+class TodoSetWhenColorState extends TodoStates{}
+
+class TodoSelectedDateTimeState extends TodoStates{}
