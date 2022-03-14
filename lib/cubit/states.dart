@@ -18,6 +18,8 @@ class TodoSelectedDateTimeState extends TodoStates{}
 
 class TodoAddNewTaskState extends TodoStates{}
 
+class TodoDeleteTaskState extends TodoStates{}
+
 class TodoClearTaskTimeState extends TodoStates{}
 
 class TodoGetAllTasksState extends TodoStates{}

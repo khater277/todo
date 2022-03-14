@@ -62,7 +62,7 @@ class TodoCubit extends Cubit<TodoStates>{
 
   void selectedDateTime(DateTime dateTime){
     taskDateTime = DateTime(dateTime.year,dateTime.month,dateTime.day,
-    taskTime!.hour,taskTime!.minute,taskTime!.second);
+        taskTime!.hour,taskTime!.minute,taskTime!.second);
     emit(TodoSelectedDateTimeState());
   }
 
@@ -72,47 +72,19 @@ class TodoCubit extends Cubit<TodoStates>{
     emit(TodoClearTaskTimeState());
   }
 
-  List<Box?> boxes = [todayTasks,tomorrowTasks,monthTasks];
-  void addNewTask({@required String? name,@required DateTime? dateTime,}){
-    TaskModel taskModel = TaskModel(
-        name: name!,
-        dateTime: dateTime!
-    );
-
-    DateTime todayDate = DateTime(DateTime.now().year,
-        DateTime.now().month,DateTime.now().day,
-        DateTime.now().hour,DateTime.now().minute,00);
-
-    DateTime tomorrowDate = todayDate.add(const Duration(days: 1));
-
-    int yearDate = DateTime.now().year;
-    int monthDate = DateTime.now().month;
-
-    if(todayDate==dateTime) {
-      boxes[0]!.add(taskModel);
-      print("DFSGGFDSDFS");
-    }
-    else if(tomorrowDate==dateTime) {
-      boxes[1]!.add(taskModel);
-    }
-
-    if(taskModel.dateTime!.year == yearDate &&
-        taskModel.dateTime!.month == monthDate){
-      boxes[2]!.add(taskModel);
-    }
-
-    tasksBox!.add(taskModel);
-    taskDateTime = null;
-    emit(TodoAddNewTaskState());
+  int scheduleTaskIndex = 0;
+  void setScheduledTask(int index){
+    scheduleTaskIndex = index;
+    emit(TodoSetScheduledTaskState());
   }
 
-  Map<int,List<TaskModel>> allTasks = {
-    0:<TaskModel>[],
-    1:<TaskModel>[],
-    2:<TaskModel>[],
-  };
+  void taskOperation({
+  @required TaskModel? task,
+  @required bool? isAdd,
+}){
+    DateTime taskDate =DateTime(task!.dateTime!.year,
+        task.dateTime!.month,task.dateTime!.day);
 
-  void getAllTasks(){
     DateTime todayDate = DateTime(DateTime.now().year,
         DateTime.now().month,DateTime.now().day);
 
@@ -121,32 +93,66 @@ class TodoCubit extends Cubit<TodoStates>{
     int yearDate = DateTime.now().year;
     int monthDate = DateTime.now().month;
 
-    for (var task in tasksBox!.values) {
-      DateTime taskDate = DateTime(task.dateTime!.year,
-          task.dateTime!.month,task.dateTime!.day);
-
-      if(todayDate==taskDate) {
-        allTasks[0]!.add(task);
+    if(todayDate==taskDate) {
+      if(isAdd==true) {
+        allTasks[0].add(task);
+      }else{
+        allTasks[0].remove(task);
       }
-      else if(tomorrowDate==taskDate) {
-        allTasks[1]!.add(task);
-      }
-
-      if(task.dateTime!.year == yearDate &&
-          task.dateTime!.month == monthDate){
-        allTasks[2]!.add(task);
-      }
-
     }
-    print("GET TODAY TASKS DONE ${allTasks[0]!.length}");
-    print("GET TOMORROW TASKS DONE ${allTasks[1]!.length}");
-    print("GET MONTH TASKS DONE ${allTasks[2]!.length}");
+    else if(tomorrowDate==taskDate) {
+      if(isAdd==true) {
+        allTasks[1].add(task);
+      }else{
+        allTasks[1].remove(task);
+      }
+    }
+
+    if(taskDate.year == yearDate &&
+        taskDate.month == monthDate){
+      if(isAdd==true) {
+        allTasks[2].add(task);
+      }else{
+        allTasks[2].remove(task);
+      }
+    }
+  }
+
+
+  List<TaskModel> tasks = [];
+  List<List<TaskModel>> allTasks = [[],[],[]];
+  void getAllTasks(){
+    for (int i = 0 ; i < tasksBox!.length ; i++) {
+      TaskModel task = tasksBox!.getAt(i);
+      tasks.add(task);
+      taskOperation(task: task, isAdd: true);
+    }
+    print(allTasks);
     emit(TodoGetAllTasksState());
   }
 
-  int scheduleTaskIndex = 0;
-  void setScheduledTask(int index){
-    scheduleTaskIndex = index;
-    emit(TodoSetScheduledTaskState());
+
+  List<Box?> boxes = [todayTasks,tomorrowTasks,monthTasks];
+  void addNewTask({@required String? name,@required DateTime? dateTime,}){
+    TaskModel task = TaskModel(
+        name: name!,
+        dateTime: dateTime!
+    );
+
+    taskOperation(task: task, isAdd: true);
+    tasksBox!.add(task);
+    tasks.add(task);
+    taskDateTime = null;
+    emit(TodoAddNewTaskState());
   }
+
+  void deleteTask({@required int? index,@required TaskModel? task}){
+
+    int taskIndex = tasks.indexOf(task!);
+    tasksBox!.deleteAt(taskIndex);
+    tasks.remove(task);
+    taskOperation(task: task, isAdd: false);
+    emit(TodoDeleteTaskState());
+  }
+
 }

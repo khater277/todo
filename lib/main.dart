@@ -1,6 +1,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -34,7 +35,6 @@ void main() async {
   tomorrowTasks = await Hive.openBox('tomorrowTasks');
   monthTasks = await Hive.openBox('monthTasks');
   runApp(const MyApp());
-  print("===================== ${todayTasks!.length}");
 }
 
 class MyApp extends StatelessWidget {
@@ -42,8 +42,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return BlocProvider(
-      create: (BuildContext context) => TodoCubit(),
+      create: (BuildContext context) => TodoCubit()..getAllTasks(),
       child: BlocConsumer<TodoCubit, TodoStates>(
         listener: (context, state) {},
         builder: (context, state) {
