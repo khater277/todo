@@ -40,21 +40,21 @@ class WhenTask extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     GestureDetector(
-                      onTap: (){cubit.setWhenColor(0);},
+                      onTap: (){cubit.setWhenColor(context,0);},
                         child: TaskDate(
                           text: "Today",color: cubit.currentIndex==0?
                         pink:Colors.grey.withOpacity(0.8),
                         )
                     ),
                     GestureDetector(
-                      onTap: (){cubit.setWhenColor(1);},
+                      onTap: (){cubit.setWhenColor(context,1);},
                         child: TaskDate(
                           text: "Tomorrow",color: cubit.currentIndex==1?
                         pink:Colors.grey.withOpacity(0.8),
                         )
                     ),
                     GestureDetector(
-                      onTap: (){cubit.setWhenColor(2);},
+                      onTap: (){cubit.setWhenColor(context,2);},
                         child: TaskDate(
                           text: "Select Date",color: cubit.currentIndex==2?
                           pink:Colors.grey.withOpacity(0.8),
@@ -130,8 +130,8 @@ class TimeButton extends StatelessWidget {
             Navigator.of(context).push(
               showPicker(
                 context: context,
-                accentColor: blue,
-                unselectedColor: blue.withOpacity(0.3),
+                accentColor: Colors.black87,
+                unselectedColor: Colors.black26,
                 value: TimeOfDay.now(),
                 onChange: (value){},
                 //iosStylePicker: true,
@@ -143,11 +143,11 @@ class TimeButton extends StatelessWidget {
                 },
                 okStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
                   fontSize: 16,
-                  color: blue,
+                  color: Colors.black87,
                 ),
                 cancelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
                   fontSize: 16,
-                  color: blue,
+                  color: Colors.black87,
                 ),
               ),
             );

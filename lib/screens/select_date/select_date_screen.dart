@@ -69,10 +69,12 @@ class SelectDateScreen extends StatelessWidget {
               selectionMode: DateRangePickerSelectionMode.single,
               showActionButtons: true,
               onSubmit: (dynamic value){
+                Get.back();
                 DateTime dateTime = value;
                 cubit.selectedDateTime(dateTime);
-                Get.snackbar(cubit.taskDateTime.toString(),
-                    cubit.taskDateTime.toString());
+              },
+              onCancel: (){
+                Get.back();
               },
             ),
           ),

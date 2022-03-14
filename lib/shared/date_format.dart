@@ -54,6 +54,12 @@ class DateFormatter {
     };
   }
 
+  String time(String dateTime){
+    String date = dateFormat(dateTime)!['date']!;
+    int atIndex = date.indexOf('at');
+    return date.substring(atIndex+3,date.length);
+  }
+
   dynamic languageFun({
     @required ar,
     @required en,

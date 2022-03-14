@@ -1,7 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:todo/styles/icons_broken.dart';
+
+
+SnackbarController showSnackBar ({
+  @required BuildContext? context,
+  @required String? title,
+  @required String? content,
+  @required Color? color,
+  @required Color? fontColor,
+  @required IconData? icon,
+}){
+  return Get.snackbar(
+      title!,
+      content!,
+      titleText: Text(title,
+        style: Theme.of(context!).textTheme.bodyText1!.copyWith(
+            fontSize: 18,
+            color: fontColor!
+        ),
+      ),
+      messageText: Text(
+        content,
+        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+            fontSize: 15,
+            color: fontColor
+        ),
+      ),
+      icon: Icon(
+        icon!,
+        color: fontColor,
+        size: 25,),
+      duration: const Duration(seconds: 3),
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: color!,
+      borderRadius: 10,
+      margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 7)
+    //padding: const EdgeInsets.all(0)
+  );
+}
+
+
 
 
 class NoLeadingSpaceFormatter extends TextInputFormatter {
@@ -151,10 +192,9 @@ class NoItemsFounded extends StatelessWidget {
           children: [
             widget,
             const SizedBox(height: 15,),
-            Text(text,style: TextStyle(
-                color: Colors.grey[400],
-                fontSize: 20,
-                fontWeight: FontWeight.normal
+            Text(text,style: Theme.of(context).textTheme.bodyText1!.copyWith(
+              color: Colors.grey[400],
+              fontSize: 22,
             ),)
           ],
         ),

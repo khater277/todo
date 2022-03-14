@@ -44,7 +44,10 @@ class GenerateMaterialColor{
 
 const Color pink = Color(0xffFE4775);
 const Color blue = Color(0xff161060);
-Box? studentBox;
+Box? tasksBox;
+Box? todayTasks;
+Box? tomorrowTasks;
+Box? monthTasks;
 String? lang;
 String? defaultLang;
 ZoomDrawerController zoomDrawerController = ZoomDrawerController();

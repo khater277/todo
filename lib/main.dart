@@ -10,6 +10,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:todo/cubit/bloc_observer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
+import 'package:todo/models/TaskModel.dart';
 import 'package:todo/screens/calendar/calendar_screen.dart';
 import 'package:todo/screens/home/home_screen.dart';
 import 'package:todo/screens/opening/opening_screen.dart';
@@ -26,10 +27,14 @@ void main() async {
   /// get device language
   final String defaultLocale = Platform.localeName.substring(0, 2);
   defaultLang = defaultLocale;
-  //await Hive.initFlutter();
-  //Hive.registerAdapter(StudentModelAdapter());
-  //studentBox = await Hive.openBox("students");
+  await Hive.initFlutter();
+  Hive.registerAdapter(TaskModelAdapter());
+  tasksBox = await Hive.openBox('tasksBox');
+  todayTasks = await Hive.openBox('todayTasks');
+  tomorrowTasks = await Hive.openBox('tomorrowTasks');
+  monthTasks = await Hive.openBox('monthTasks');
   runApp(const MyApp());
+  print("===================== ${todayTasks!.length}");
 }
 
 class MyApp extends StatelessWidget {

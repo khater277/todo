@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
+import 'package:todo/models/TaskModel.dart';
 import 'package:todo/screens/add_task/add_task_items/add_task_head.dart';
 import 'package:todo/screens/add_task/add_task_items/when_task.dart';
+import 'package:todo/shared/constants.dart';
 import 'package:todo/shared/default_widgets.dart';
 import 'package:todo/styles/icons_broken.dart';
 
@@ -37,6 +39,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             leading: IconButton(
                 onPressed: (){
                   Get.back();
+                  cubit.clearTaskTime();
                 },
                 icon: const Icon(IconBroken.Arrow___Left_2)
             ),
@@ -77,7 +80,28 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     onPressed: (){
                       if(_formKey.currentState!.validate()){
                         if(cubit.taskDateTime==null) {
-                          Get.snackbar("warning", "please set time first");
+                          showSnackBar(
+                              title: "warning",
+                              content: "please set time first",
+                              context: context,
+                              color: Colors.black87,
+                              fontColor: Colors.white,
+                              icon: IconBroken.Danger
+                          );
+                        }else{
+                          showSnackBar(
+                              title: "Done",
+                              content: "Task added successfully",
+                              context: context,
+                              color: Colors.black87,
+                              fontColor: Colors.white,
+                              icon: IconBroken.Upload
+                          );
+                          cubit.addNewTask(
+                              name: _taskController.text,
+                              dateTime: cubit.taskDateTime
+                          );
+                          _taskController.clear();
                         }
                       }
                     }

@@ -15,3 +15,11 @@ class TodoSetTaskTimeState extends TodoStates{}
 class TodoSetWhenColorState extends TodoStates{}
 
 class TodoSelectedDateTimeState extends TodoStates{}
+
+class TodoAddNewTaskState extends TodoStates{}
+
+class TodoClearTaskTimeState extends TodoStates{}
+
+class TodoGetAllTasksState extends TodoStates{}
+
+class TodoSetScheduledTaskState extends TodoStates{}
