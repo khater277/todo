@@ -3,17 +3,17 @@ import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 
 
-class ScheduleTaskText extends StatelessWidget {
+class SidebarText extends StatelessWidget {
   final TodoCubit cubit;
   final String text;
   final int index;
-  const ScheduleTaskText({Key? key, required this.text, required this.index, required this.cubit}) : super(key: key);
+  const SidebarText({Key? key, required this.text, required this.index, required this.cubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        onTap: (){cubit.setScheduledTask(index);},
+        onTap: (){cubit.setDashboardTask(index);},
         child: Container(
           color: Colors.white,
           child: Center(
@@ -24,7 +24,7 @@ class ScheduleTaskText extends StatelessWidget {
                 child: Text(text,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     fontSize: 14,
-                    color: cubit.scheduleTaskIndex==index?pink:Colors.grey.withOpacity(0.7),
+                    color: cubit.dashboardTaskIndex==index?pink:Colors.grey.withOpacity(0.7),
                     letterSpacing: 1,
                   ),),
               ),
@@ -36,30 +36,30 @@ class ScheduleTaskText extends StatelessWidget {
   }
 }
 
-class TasksSchedules extends StatelessWidget {
+class DashboardSidebar extends StatelessWidget {
   final TodoCubit cubit;
-  const TasksSchedules({Key? key, required this.cubit}) : super(key: key);
+  const DashboardSidebar({Key? key, required this.cubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ScheduleTaskText(
+        SidebarText(
           cubit: cubit,
-            text: "TODAY",
-            index: 0,
+          text: "COMPLETED TASKS",
+          index: 0,
         ),
         const SizedBox(height: 10,),
-        ScheduleTaskText(
-            cubit: cubit,
-            text: "TOMORROW",
-            index: 1,
+        SidebarText(
+          cubit: cubit,
+          text: "PENDING",
+          index: 1,
         ),
         const SizedBox(height: 10,),
-        ScheduleTaskText(
-            cubit: cubit,
-            text: "THIS MONTH",
-            index: 2,
+        SidebarText(
+          cubit: cubit,
+          text: "ALL TASKS",
+          index: 2,
         ),
       ],
     );

@@ -25,3 +25,5 @@ class TodoClearTaskTimeState extends TodoStates{}
 class TodoGetAllTasksState extends TodoStates{}
 
 class TodoSetScheduledTaskState extends TodoStates{}
+
+class TodoSetDashboardTaskState extends TodoStates{}

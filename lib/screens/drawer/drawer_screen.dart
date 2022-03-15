@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/screens/calendar/calendar_screen.dart';
+import 'package:todo/screens/dashboard/dashboard_screen.dart';
+import 'package:todo/screens/edit_tasks/edit_tasks_screen.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 // ignore: must_be_immutable
@@ -65,12 +67,18 @@ class DrawerScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30,),
-            DrawerItem(text: "Dashboard",icon: IconBroken.Category,),
+            GestureDetector(
+                onTap: (){Get.to(()=>const DashboardScreen());},
+                child: DrawerItem(text: "Dashboard",icon: IconBroken.Category,)
+            ),
             GestureDetector(
               onTap: (){Get.to(()=>const CalendarScreen());},
                 child: DrawerItem(text: "Calender",icon: IconBroken.Calendar,)
             ),
-            DrawerItem(text: "Categorize Tasks",icon: IconBroken.Document,),
+            GestureDetector(
+                onTap: (){Get.to(()=>const EditTasksScreen());},
+                child: DrawerItem(text: "Edit Tasks",icon: IconBroken.Edit_Square,)
+            ),
             DrawerItem(text: "Setting",icon: IconBroken.Setting,),
             const SizedBox(height: 30,),
             DrawerItem(text: "About",isSub: true,),

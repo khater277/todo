@@ -78,6 +78,12 @@ class TodoCubit extends Cubit<TodoStates>{
     emit(TodoSetScheduledTaskState());
   }
 
+  int dashboardTaskIndex = 0;
+  void setDashboardTask(int index){
+    dashboardTaskIndex = index;
+    emit(TodoSetDashboardTaskState());
+  }
+
   void taskOperation({
   @required TaskModel? task,
   @required bool? isAdd,
@@ -121,6 +127,7 @@ class TodoCubit extends Cubit<TodoStates>{
 
   List<TaskModel> tasks = [];
   List<List<TaskModel>> allTasks = [[],[],[]];
+
   void getAllTasks(){
     for (int i = 0 ; i < tasksBox!.length ; i++) {
       TaskModel task = tasksBox!.getAt(i);
@@ -131,12 +138,12 @@ class TodoCubit extends Cubit<TodoStates>{
     emit(TodoGetAllTasksState());
   }
 
-
-  List<Box?> boxes = [todayTasks,tomorrowTasks,monthTasks];
   void addNewTask({@required String? name,@required DateTime? dateTime,}){
     TaskModel task = TaskModel(
         name: name!,
-        dateTime: dateTime!
+        dateTime: dateTime!,
+      isCompleted: false,
+      isPinned: false
     );
 
     taskOperation(task: task, isAdd: true);

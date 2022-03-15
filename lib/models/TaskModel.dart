@@ -12,9 +12,17 @@ class TaskModel{
  @HiveField(1)
  @required DateTime? dateTime;
 
+ @HiveField(2)
+  @required bool? isCompleted;
+
+ @HiveField(3)
+ @required bool? isPinned;
+
  TaskModel({
  @required this.name,
  @required this.dateTime,
+ @required this.isCompleted,
+ @required this.isPinned,
 });
 
 }
