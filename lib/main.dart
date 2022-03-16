@@ -5,26 +5,27 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:responsive_framework/utils/responsive_utils.dart';
 import 'package:todo/cubit/bloc_observer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/models/TaskModel.dart';
-import 'package:todo/screens/calendar/calendar_screen.dart';
-import 'package:todo/screens/home/home_screen.dart';
+import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/opening/opening_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/themes.dart';
 import 'package:todo/translations/translation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:timezone/data/latest.dart' as tz;
+
+
 //
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   await GetStorage.init();
+  tz.initializeTimeZones();
 
   /// get device language
   final String defaultLocale = Platform.localeName.substring(0, 2);
@@ -32,12 +33,34 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
   tasksBox = await Hive.openBox('tasksBox');
-  //tasksBox!.deleteAll(tasksBox!.keys);
+
+  NotificationsHelper.init();
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    super.initState();
+    NotificationsHelper.configureDidReceiveLocalNotificationSubject(context);
+    NotificationsHelper.configureSelectNotificationSubject();
+  }
+
+  @override
+  void dispose() {
+    NotificationsHelper.didReceiveLocalNotificationSubject.close();
+    NotificationsHelper.selectNotificationSubject.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

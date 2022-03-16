@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/notifications/notifications.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class HomeHead extends StatelessWidget {
@@ -24,7 +25,10 @@ class HomeHead extends StatelessWidget {
                 ),
                 const Spacer(),
                 IconButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      // NotificationsHelper.showNotification();
+                      //NotificationsHelper.zonedScheduleNotification();
+                    },
                     icon: const Icon(
                       IconBroken.Notification,
                       size: 25,

@@ -43,6 +43,7 @@ dependencies:
   flutter_zoom_drawer: ^2.3.1+1
   day_night_time_picker: ^1.0.5
   flutter_local_notifications: ^9.4.0
+  rxdart: ^0.27.3
 
 
 

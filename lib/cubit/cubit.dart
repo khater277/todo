@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/models/TaskModel.dart';
+import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/select_date/select_date_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/shared/default_widgets.dart';
@@ -179,11 +180,11 @@ class TodoCubit extends Cubit<TodoStates>{
         isCompleted: false,
         isPending: false
     );
-
     taskOperation(task: task, isAdd: true);
     tasksBox!.add(task);
     tasks.add(task);
     taskDateTime = null;
+    NotificationsHelper.zonedScheduleNotification(dateTime: dateTime);
     emit(TodoAddNewTaskState());
   }
 

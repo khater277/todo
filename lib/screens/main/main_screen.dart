@@ -22,54 +22,63 @@ class MainScreen extends StatelessWidget {
         listener: (context,state){},
         builder: (context,state){
           TodoCubit cubit = TodoCubit.get(context);
-          return Scaffold(
-            appBar: AppBar(
-              toolbarHeight: 110,
-              elevation: 0,
-              leading: Align(
-                alignment: AlignmentDirectional.bottomStart,
-                child: GestureDetector(
-                  onTap: () {
-                    zoomDrawerController.toggle!();
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: ImageIcon(
-                      AssetImage("assets/images/menu.png"),
-                      size: 50,
+          return Builder(
+            builder: (context) {
+
+              DateTime todayDate = DateTime.now();
+
+              //if()
+
+              return Scaffold(
+                appBar: AppBar(
+                  toolbarHeight: 110,
+                  elevation: 0,
+                  leading: Align(
+                    alignment: AlignmentDirectional.bottomStart,
+                    child: GestureDetector(
+                      onTap: () {
+                        zoomDrawerController.toggle!();
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: ImageIcon(
+                          AssetImage("assets/images/menu.png"),
+                          size: 50,
+                        ),
+                      ),
                     ),
                   ),
+                  leadingWidth: 100,
                 ),
-              ),
-              leadingWidth: 100,
-            ),
-            body: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Column(
-                children: [
-                  const HomeHead(),
-                  Expanded(
-                    child: Row(
-                      children: [
-                        TasksSchedules(cubit: cubit,),
-                        ShowTasks(cubit: cubit,),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Get.to(() => const AddTaskScreen());
-              },
-              backgroundColor: Colors.black87,
-              elevation: 0,
-              child: const Icon(
-                Icons.add,
-              ),
-              shape: const RoundedRectangleBorder(),
-            ),
+                body: Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Column(
+                    children: [
+                      const HomeHead(),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            TasksSchedules(cubit: cubit,),
+                            ShowTasks(cubit: cubit,),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {
+                    Get.to(() => const AddTaskScreen());
+                  },
+                  backgroundColor: Colors.black87,
+                  elevation: 0,
+                  child: const Icon(
+                    Icons.add,
+                  ),
+                  shape: const RoundedRectangleBorder(),
+                ),
+              );
+            }
           );
         },
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/home/home_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
