@@ -20,7 +20,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       name: fields[0] as String?,
       dateTime: fields[1] as DateTime?,
       isCompleted: fields[2] as bool?,
-      isPinned: fields[3] as bool?,
+      isPending: fields[3] as bool?,
     );
   }
 
@@ -35,7 +35,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       ..writeByte(2)
       ..write(obj.isCompleted)
       ..writeByte(3)
-      ..write(obj.isPinned);
+      ..write(obj.isPending);
   }
 
   @override

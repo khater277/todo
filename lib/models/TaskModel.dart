@@ -16,13 +16,13 @@ class TaskModel{
   @required bool? isCompleted;
 
  @HiveField(3)
- @required bool? isPinned;
+ @required bool? isPending;
 
  TaskModel({
  @required this.name,
  @required this.dateTime,
  @required this.isCompleted,
- @required this.isPinned,
+ @required this.isPending,
 });
 
 }

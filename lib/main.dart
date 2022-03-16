@@ -32,6 +32,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
   tasksBox = await Hive.openBox('tasksBox');
+  //tasksBox!.deleteAll(tasksBox!.keys);
   runApp(const MyApp());
 }
 

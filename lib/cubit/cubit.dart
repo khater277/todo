@@ -122,19 +122,53 @@ class TodoCubit extends Cubit<TodoStates>{
         allTasks[2].remove(task);
       }
     }
+
+    if(task.isCompleted!){
+      if(isAdd==true) {
+        dashboardTasks[0].add(task);
+      }else{
+        dashboardTasks[0].remove(task);
+      }
+    }
+    if(task.isPending!){
+      if(isAdd==true) {
+        dashboardTasks[1].add(task);
+      }else{
+        dashboardTasks[1].remove(task);
+      }
+    }
+
+    if(isAdd==false){
+      tasks.remove(task);
+      dashboardTasks[2].remove(task);
+    }
   }
 
 
   List<TaskModel> tasks = [];
   List<List<TaskModel>> allTasks = [[],[],[]];
+  List<List<TaskModel>> dashboardTasks = [[],[],[]];
 
   void getAllTasks(){
+    tasks = [];
+    allTasks = [[],[],[]];
+    dashboardTasks = [[],[],[]];
+
     for (int i = 0 ; i < tasksBox!.length ; i++) {
       TaskModel task = tasksBox!.getAt(i);
       tasks.add(task);
       taskOperation(task: task, isAdd: true);
     }
-    print(allTasks);
+//    someObjects.sort((a, b) => a.someProperty.compareTo(b.someProperty));
+
+    tasks.sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
+    allTasks[0].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
+    allTasks[1].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
+    allTasks[2].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
+    dashboardTasks[0].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
+    dashboardTasks[1].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
+    dashboardTasks[2] = tasks;
+    print(dashboardTasks[2]);
     emit(TodoGetAllTasksState());
   }
 
@@ -142,8 +176,8 @@ class TodoCubit extends Cubit<TodoStates>{
     TaskModel task = TaskModel(
         name: name!,
         dateTime: dateTime!,
-      isCompleted: false,
-      isPinned: false
+        isCompleted: false,
+        isPending: false
     );
 
     taskOperation(task: task, isAdd: true);
@@ -154,12 +188,59 @@ class TodoCubit extends Cubit<TodoStates>{
   }
 
   void deleteTask({@required int? index,@required TaskModel? task}){
-
     int taskIndex = tasks.indexOf(task!);
     tasksBox!.deleteAt(taskIndex);
-    tasks.remove(task);
+    //tasks.remove(task);
     taskOperation(task: task, isAdd: false);
     emit(TodoDeleteTaskState());
+  }
+
+  void addToCompleted({@required int? index,@required TaskModel? task}){
+    TaskModel newTask = TaskModel(
+        name: task!.name,
+        dateTime: task.dateTime,
+        isCompleted: true,
+        isPending: task.isPending
+    );
+    tasksBox!.putAt(index!, newTask);
+    getAllTasks();
+    emit(TodoAddToCompletedState());
+  }
+
+  void removeFromCompleted({@required int? index,@required TaskModel? task}){
+    TaskModel newTask = TaskModel(
+        name: task!.name,
+        dateTime: task.dateTime,
+        isCompleted: false,
+        isPending: task.isPending
+    );
+    tasksBox!.putAt(index!, newTask);
+    getAllTasks();
+    emit(TodoRemoveFromCompletedState());
+  }
+
+  void addToPend({@required int? index,@required TaskModel? task}){
+    TaskModel newTask = TaskModel(
+        name: task!.name,
+        dateTime: task.dateTime,
+        isCompleted: task.isCompleted,
+        isPending: true
+    );
+    tasksBox!.putAt(index!, newTask);
+    getAllTasks();
+    emit(TodoAddToPendState());
+  }
+
+  void removeFromPend({@required int? index,@required TaskModel? task}){
+    TaskModel newTask = TaskModel(
+        name: task!.name,
+        dateTime: task.dateTime,
+        isCompleted: task.isCompleted,
+        isPending: false
+    );
+    tasksBox!.putAt(index!, newTask);
+    getAllTasks();
+    emit(TodoRemoveFromPendState());
   }
 
 }

@@ -48,15 +48,16 @@ class EditShowTasks extends StatelessWidget {
 }
 
 class EditTaskText extends StatelessWidget {
-  final String text;
-  final String dateTime;
-  final bool isCompleted;
+  final TodoCubit cubit;
+  final TaskModel task;
+  final int index;
+
 
   const EditTaskText(
       {Key? key,
-        required this.text,
-        required this.isCompleted,
-        required this.dateTime})
+        required this.cubit,
+        required this.task,
+        required this.index})
       : super(key: key);
 
   @override
@@ -67,24 +68,26 @@ class EditTaskText extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(dateTime,
+              Text(DateFormatter()
+                  .dateFormat(task.dateTime!.toString())!['date']!,
                   style: TextStyle(
                     fontSize: 11,
                     color: Colors.grey,
                     letterSpacing: 0.5,
                     fontFamily: "Avenir-Medium",
                     decoration:
-                    isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+                    task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
                     decorationColor: pink,
                   )),
+              const SizedBox(width: 5,),
               const SizedBox(
                 height: 2,
               ),
               Text(
-                text,
+                task.name!,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     decoration:
-                    isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+                    task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
                     decorationColor: pink,
                     fontSize: 20,
                     color: Colors.black87,
@@ -93,7 +96,32 @@ class EditTaskText extends StatelessWidget {
             ],
           ),
         ),
-        const PopupMenu()
+        if(task.isPending!)
+          Row(
+            children: [
+              const SizedBox(width: 15,),
+              GestureDetector(
+                onTap: (){
+                  cubit.removeFromPend(index: index, task: task);
+                },
+                  child: const Icon(IconBroken.Bookmark,size: 20,color: pink,)),
+              //SizedBox(width: 8,)
+            ],
+          ),
+        if(task.isCompleted!)
+          Row(
+            children: [
+              const SizedBox(width: 15,),
+              GestureDetector(
+                  onTap: (){
+                    cubit.removeFromCompleted(index: index, task: task);
+                  },
+                  child: const Icon(IconBroken.Shield_Done,
+                    size: 20,color: Colors.green,)),
+              //SizedBox(width: 8,)
+            ],
+          ),
+        PopupMenu(cubit: cubit,index: index,task: task,)
       ],
     );
   }
@@ -118,10 +146,10 @@ class EditTaskInfo extends StatelessWidget {
             height: 10,
           ),
         EditTaskText(
-            text: "${task.name}",
-            dateTime: DateFormatter()
-                .dateFormat(task.dateTime!.toString())!['date']!,
-            isCompleted: task.isCompleted!),
+            cubit: cubit,
+          task: task,
+          index: index,
+        ),
         if (index == tasksBox!.length - 1)
           const SizedBox(
             height: 60,

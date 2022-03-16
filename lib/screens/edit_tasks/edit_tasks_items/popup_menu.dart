@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:todo/cubit/cubit.dart';
+import 'package:todo/models/TaskModel.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class PopupMenu extends StatelessWidget {
-  const PopupMenu({Key? key}) : super(key: key);
+  final TodoCubit cubit;
+  final TaskModel task;
+  final int index;
+  const PopupMenu({Key? key, required this.task, required this.index, required this.cubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class PopupMenu extends StatelessWidget {
         "icon":IconBroken.Shield_Done,
       },
       {
-        "name":"Pin",
+        "name":"Pend",
         "icon":IconBroken.Bookmark,
       },
       {
@@ -33,7 +38,14 @@ class PopupMenu extends StatelessWidget {
         color: (const Color(0xff010108)),
         elevation: 0,
         enabled: true,
-        onSelected: (value) {
+        onSelected: (Map<String,dynamic>value) {
+          if(value['name'] == "Delete") {
+            cubit.deleteTask(index: index, task: task);
+          }else if(value['name'] == "Complete"){
+            cubit.addToCompleted(index: index, task: task);
+          }else{
+            cubit.addToPend(index: index, task: task);
+          }
           print(value);
           //cubit.deletePost(index: index);
         },

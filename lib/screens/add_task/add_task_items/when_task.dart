@@ -33,35 +33,53 @@ class WhenTask extends StatelessWidget {
             const SizedBox(height: 8,),
             Container(
               width: double.infinity,
-              color: Colors.grey.withOpacity(0.08),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: (){cubit.setWhenColor(context,0);},
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.08),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10)
+                )
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: (){cubit.setWhenColor(context,0);},
+                    child: Container(
+                      color: Colors.grey.withOpacity(0.0),
+                      child: Center(
                         child: TaskDate(
                           text: "Today",color: cubit.currentIndex==0?
                         pink:Colors.grey.withOpacity(0.8),
-                        )
+                        ),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: (){cubit.setWhenColor(context,1);},
+                  ),
+                  GestureDetector(
+                    onTap: (){cubit.setWhenColor(context,1);},
+                    child: Container(
+                      color: Colors.grey.withOpacity(0.0),
+                      child: Center(
                         child: TaskDate(
                           text: "Tomorrow",color: cubit.currentIndex==1?
                         pink:Colors.grey.withOpacity(0.8),
-                        )
+                        ),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: (){cubit.setWhenColor(context,2);},
+                  ),
+                  GestureDetector(
+                    onTap: (){cubit.setWhenColor(context,2);},
+                    child: Container(
+                      color: Colors.grey.withOpacity(0.0),
+                      child: Center(
                         child: TaskDate(
                           text: "Select Date",color: cubit.currentIndex==2?
-                          pink:Colors.grey.withOpacity(0.8),
-                        )
+                        pink:Colors.grey.withOpacity(0.8),
+                        ),
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 10,),
@@ -96,12 +114,15 @@ class TaskDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
-      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-        fontSize: 17,
-        color: color,
-        letterSpacing: 1,
-      ),);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 25),
+      child: Text(text,
+        style: Theme.of(context).textTheme.bodyText1!.copyWith(
+          fontSize: 17,
+          color: color,
+          letterSpacing: 1,
+        ),),
+    );
   }
 }
 
