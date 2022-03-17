@@ -24,11 +24,7 @@ class MainScreen extends StatelessWidget {
           TodoCubit cubit = TodoCubit.get(context);
           return Builder(
             builder: (context) {
-
-              DateTime todayDate = DateTime.now();
-
-              //if()
-
+              cubit.getNotificationTasks();
               return Scaffold(
                 appBar: AppBar(
                   toolbarHeight: 110,
@@ -54,7 +50,7 @@ class MainScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      const HomeHead(),
+                      HomeHead(cubit: cubit,),
                       Expanded(
                         child: Row(
                           children: [

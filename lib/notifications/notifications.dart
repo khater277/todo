@@ -1,8 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:rxdart/subjects.dart';
+import 'package:todo/cubit/cubit.dart';
+import 'package:todo/models/TaskModel.dart';
+import 'package:todo/screens/dashboard/dashboard_screen.dart';
+import 'package:todo/screens/notifiications/notifications_screen.dart';
+import 'package:todo/shared/constants.dart';
 
 class ReceivedNotification {
   ReceivedNotification({
@@ -102,7 +108,12 @@ class NotificationsHelper{
 
   static void configureSelectNotificationSubject() {
     NotificationsHelper.selectNotificationSubject.stream.listen((String? payload) async {
-      debugPrint("$payload");
+      debugPrint("$payload dddddddddddddddddddd");
+      int index = int.parse(payload!);
+      // TaskModel task = tasksBox!.getAt(index);
+      // TodoCubit.get(context).notificationTasks.add(task);
+        Get.to(()=>const NotificationsScreen());
+        //print(TodoCubit.get(context).notificationTasks);
       //await Navigator.pushNamed(context, '/secondPage');
     });
   }
@@ -113,7 +124,9 @@ class NotificationsHelper{
         channelDescription: 'your channel description',
         importance: Importance.max,
         priority: Priority.high,
-        ticker: 'ticker');
+        ticker: 'ticker',
+
+    );
     const NotificationDetails platformChannelSpecifics =
     NotificationDetails(android: androidPlatformChannelSpecifics);
     await notifications.show(
@@ -122,19 +135,28 @@ class NotificationsHelper{
   }
 
   static Future<void> zonedScheduleNotification({
-  @required DateTime? dateTime,
+  required BuildContext context,
+  required TaskModel task,
 }) async {
     tz.TZDateTime tzDate = tz.TZDateTime
-    .from(dateTime!, tz.local);
+    .from(task.dateTime!, tz.local);
+    //TodoCubit.get(context).notificationTasks.add(task);
     await notifications.zonedSchedule(
         0,
-        'scheduled title',
-        'scheduled body',
+        'Hey there',
+        'you have scheduled task to do now',
         tzDate,
         const NotificationDetails(
             android: AndroidNotificationDetails(
                 'your channel id', 'your channel name',
-                channelDescription: 'your channel description')),
+                channelDescription: 'your channel description',
+                importance: Importance.max,
+                priority: Priority.high,
+                ticker: 'ticker',
+                icon: "app_icon"
+            )
+        ),
+        payload: 'notifications',
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
         UILocalNotificationDateInterpretation.absoluteTime);

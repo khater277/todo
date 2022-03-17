@@ -89,6 +89,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               icon: IconBroken.Danger
                           );
                         }else{
+                          FocusScope.of(context).unfocus();
                           showSnackBar(
                               title: "Done",
                               content: "Task added successfully",
@@ -98,6 +99,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               icon: IconBroken.Upload
                           );
                           cubit.addNewTask(
+                            context: context,
                               name: _taskController.text,
                               dateTime: cubit.taskDateTime
                           );

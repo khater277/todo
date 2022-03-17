@@ -18,11 +18,15 @@ class TaskModel{
  @HiveField(3)
  @required bool? isPending;
 
+ @HiveField(4)
+ @required bool? isNotification;
+
  TaskModel({
  @required this.name,
  @required this.dateTime,
  @required this.isCompleted,
  @required this.isPending,
+ @required this.isNotification
 });
 
 }

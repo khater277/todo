@@ -20,9 +20,13 @@ class TodoAddNewTaskState extends TodoStates{}
 
 class TodoDeleteTaskState extends TodoStates{}
 
+class TodoRemoveFromNotificationsState extends TodoStates{}
+
 class TodoClearTaskTimeState extends TodoStates{}
 
 class TodoGetAllTasksState extends TodoStates{}
+
+class TodoGetNotificationTasksState extends TodoStates{}
 
 class TodoSetScheduledTaskState extends TodoStates{}
 

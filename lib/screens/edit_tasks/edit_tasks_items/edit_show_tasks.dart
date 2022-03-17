@@ -27,7 +27,8 @@ class EditShowTasks extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(
                 left: 20,bottom: 10),
-            child: ListView.builder(
+            child: cubit.tasks.isNotEmpty?
+            ListView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder:(context,index){
@@ -39,6 +40,14 @@ class EditShowTasks extends StatelessWidget {
                   );
                 },
                 itemCount: cubit.tasks.length
+            )
+            :NoItemsFounded(
+              text: "Empty",
+              widget: Icon(
+                IconBroken.Document,
+                size: 60,
+                color: Colors.grey[500],
+              ),
             ),
           ),
         ),

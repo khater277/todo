@@ -59,7 +59,7 @@ class DrawerScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'TODO',
+              'AGENDA',
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
                 color: Colors.white,
                 fontSize: 30,

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:todo/cubit/cubit.dart';
 import 'package:todo/notifications/notifications.dart';
+import 'package:todo/screens/notifiications/notifications_screen.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class HomeHead extends StatelessWidget {
-  const HomeHead({Key? key}) : super(key: key);
+  final TodoCubit cubit;
+  const HomeHead({Key? key, required this.cubit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +30,26 @@ class HomeHead extends StatelessWidget {
                 const Spacer(),
                 IconButton(
                     onPressed: (){
+                      Get.to(()=>const NotificationsScreen());
                       // NotificationsHelper.showNotification();
                       //NotificationsHelper.zonedScheduleNotification();
                     },
-                    icon: const Icon(
-                      IconBroken.Notification,
-                      size: 25,
+                    icon: Stack(
+                      alignment: AlignmentDirectional.topEnd,
+                      children: [
+                        const Icon(
+                          IconBroken.Notification,
+                          size: 25,
+                        ),
+                        if(cubit.notificationTasks.isNotEmpty)
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 3),
+                          child: CircleAvatar(
+                            radius: 5,
+                            backgroundColor: Colors.red,
+                          ),
+                        ),
+                      ],
                     ))
               ],
             ),
