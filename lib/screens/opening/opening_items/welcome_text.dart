@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class WelcomeText extends StatelessWidget {
   const WelcomeText({Key? key}) : super(key: key);
@@ -11,14 +12,14 @@ class WelcomeText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Hello there,",
+            "hello".tr,
             style: Theme.of(context)
                 .textTheme
                 .bodyText1!
                 .copyWith(color: Colors.white, fontSize: 32),
           ),
           Text(
-            "Welcome",
+            "welcome".tr,
             style: Theme.of(context)
                 .textTheme
                 .bodyText1!

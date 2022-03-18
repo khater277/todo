@@ -2,13 +2,18 @@ abstract class TodoStates{}
 
 class TodoInitialState extends TodoStates{}
 
-class TodoLoadingState extends TodoStates{}
 
 class TodoErrorState extends TodoStates{
   final String error;
 
   TodoErrorState(this.error);
 }
+
+class TodoChangeThemeState extends TodoStates{}
+
+class TodoDisableNotificationsState extends TodoStates{}
+
+class TodoChangeLanguageState extends TodoStates{}
 
 class TodoSetTaskTimeState extends TodoStates{}
 

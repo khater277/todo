@@ -98,8 +98,8 @@ class EditTaskText extends StatelessWidget {
                     decoration:
                     task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
                     decorationColor: pink,
+                    decorationThickness: 2,
                     fontSize: 20,
-                    color: Colors.black87,
                     letterSpacing: 0.5),
               ),
             ],

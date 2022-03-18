@@ -57,7 +57,11 @@ class DateFormatter {
   String time(String dateTime){
     String date = dateFormat(dateTime)!['date']!;
     int atIndex = date.indexOf('at');
-    return date.substring(atIndex+3,date.length);
+    int fiIndex = date.indexOf('في');
+    return languageFun(
+        ar: date.substring(fiIndex+3,date.length),
+        en: date.substring(atIndex+3,date.length)
+    );
   }
 
   dynamic languageFun({

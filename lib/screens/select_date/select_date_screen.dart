@@ -37,24 +37,24 @@ class SelectDateScreen extends StatelessWidget {
               headerStyle: DateRangePickerHeaderStyle(
                 textAlign: TextAlign.center,
                 textStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    color: blue,
+                    color: !isDarkMode!?blue:Colors.white,
                     fontSize: 22
                 ),
               ),
               yearCellStyle: DateRangePickerYearCellStyle(
                 textStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: blue,
+                  color: !isDarkMode!?blue:Colors.white,
                   fontSize: 20,
                 ),
                 todayTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  color: blue,
+                  color: !isDarkMode!?blue:Colors.white,
                   fontSize: 18,
                 ),
               ),
 
               monthCellStyle: DateRangePickerMonthCellStyle(
                 textStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    color: blue,
+                    color: !isDarkMode!?blue:Colors.white,
                     fontSize: 20
                 ),
               ),

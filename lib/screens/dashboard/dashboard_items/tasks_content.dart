@@ -34,10 +34,10 @@ class DashboardTaskText extends StatelessWidget {
           task.name!,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(
               decoration:
-                  task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
+              task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
               decorationColor: pink,
+              decorationThickness: 2,
               fontSize: 20,
-              color: Colors.black87,
               letterSpacing: 0.5),
         ),
       ],
@@ -86,8 +86,9 @@ class DashboardShowTasks extends StatelessWidget {
         height: double.infinity,
           decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.08),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
+                  topRight: Radius.circular(languageFun(ar: 10.0, en: 0.0))
               )
           ),
         child: Padding(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/home/home_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
@@ -13,33 +12,40 @@ class NextButton extends StatelessWidget {
     return Expanded(
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.only(left: 15),
+          padding: EdgeInsets.only(left: languageFun(ar: 0.0, en: 15.0),
+          right: languageFun(ar: 15.0, en: 0.0)),
           child: Row(
             children: [
-              Text("Let's see what is waiting us",
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(color: Colors.white, fontSize: 18),
+              Expanded(
+                child: Text("opening".tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2!
+                      .copyWith(color: Colors.white, fontSize: 18),
 
+                ),
               ),
-              const Spacer(),
               ElevatedButton(
                 onPressed:(){
                   Get.to(()=>const HomeScreen(),curve: Curves.fastOutSlowIn);
                 },
-                child:const Icon(
-                  IconBroken.Arrow___Right_2,
+                child: Icon(
+                  languageFun(
+                      ar: IconBroken.Arrow___Left_2,
+                      en: IconBroken.Arrow___Right_2
+                  ),
                   color: pink,
                   size: 30,
                 ),
                 style: ElevatedButton.styleFrom(
                     elevation: 0,
                     primary:Colors.white,
-                    shape: const RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                       borderRadius:BorderRadius.only(
-                        bottomLeft: Radius.circular(5),
-                        topLeft: Radius.circular(5),
+                        bottomLeft: Radius.circular(languageFun(ar: 0.0, en: 5.0)),
+                        topLeft: Radius.circular(languageFun(ar: 0.0, en: 5.0)),
+                        topRight: Radius.circular(languageFun(ar: 5.0, en: 0.0)),
+                        bottomRight: Radius.circular(languageFun(ar: 5.0, en: 0.0)),
                       ),
                     ),
                     minimumSize: const Size(70,50)

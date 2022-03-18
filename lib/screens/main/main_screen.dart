@@ -24,7 +24,7 @@ class MainScreen extends StatelessWidget {
           TodoCubit cubit = TodoCubit.get(context);
           return Builder(
             builder: (context) {
-              cubit.getNotificationTasks();
+              //cubit.getNotificationTasks();
               return Scaffold(
                 appBar: AppBar(
                   toolbarHeight: 110,
@@ -35,11 +35,14 @@ class MainScreen extends StatelessWidget {
                       onTap: () {
                         zoomDrawerController.toggle!();
                       },
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: ImageIcon(
-                          AssetImage("assets/images/menu.png"),
-                          size: 50,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: RotatedBox(
+                          quarterTurns: languageFun(ar: 2, en: 0),
+                          child: const ImageIcon(
+                            AssetImage("assets/images/menu.png",),
+                            size: 50,
+                          ),
                         ),
                       ),
                     ),
@@ -66,12 +69,10 @@ class MainScreen extends StatelessWidget {
                   onPressed: () {
                     Get.to(() => const AddTaskScreen());
                   },
-                  backgroundColor: Colors.black87,
-                  elevation: 0,
+      //            backgroundColor: Colors.black87,
                   child: const Icon(
                     Icons.add,
                   ),
-                  shape: const RoundedRectangleBorder(),
                 ),
               );
             }

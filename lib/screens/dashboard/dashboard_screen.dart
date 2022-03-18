@@ -6,6 +6,7 @@ import 'package:todo/cubit/states.dart';
 import 'package:todo/screens/dashboard/dashboard_items/dashboard_head.dart';
 import 'package:todo/screens/dashboard/dashboard_items/dashboard_sidebar.dart';
 import 'package:todo/screens/dashboard/dashboard_items/tasks_content.dart';
+import 'package:todo/shared/default_widgets.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -20,10 +21,7 @@ class DashboardScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
-            leading: IconButton(
-              onPressed: (){Get.back();},
-              icon: const Icon(IconBroken.Arrow___Left_2),
-            ),
+            leading: const DefaultBackButton(),
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

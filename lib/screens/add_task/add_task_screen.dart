@@ -71,9 +71,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       "Add Task",
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                           fontSize: 21,
-                          color: Colors.white
+                          color: !isDarkMode!?Colors.white:Colors.black87
                       ),),
-                    color: Colors.black87,
+                    color: !isDarkMode!?Colors.black87:Colors.white,
                     rounded: 0,
                     height: 70,
                     width: double.infinity,

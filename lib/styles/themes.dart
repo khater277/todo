@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:todo/shared/constants.dart';
 
 ThemeData darkTheme=ThemeData(
+    primarySwatch: GenerateMaterialColor().generateMaterialColor(Colors.white),
     fontFamily: 'SF-Pro-Display',
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white70,
+        foregroundColor: Colors.black,
+      elevation: 0,
+      shape: RoundedRectangleBorder(),
     ),
     iconTheme: const IconThemeData(
       color: Colors.white,
@@ -28,43 +31,47 @@ ThemeData darkTheme=ThemeData(
             color: Colors.white.withOpacity(0.5)
         )
     ),
-    scaffoldBackgroundColor: HexColor('333739'),
-    appBarTheme: AppBarTheme(
-        iconTheme: const IconThemeData(
+    scaffoldBackgroundColor: const Color(0xff333739),
+    appBarTheme: const AppBarTheme(
+        iconTheme: IconThemeData(
           color: Colors.white,
         ),
         elevation: 0,
-        backgroundColor: HexColor('333739'),
+        backgroundColor: Color(0xff333739),
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.light,
           statusBarBrightness: Brightness.dark,
-          statusBarColor: HexColor('333739'),
+          statusBarColor: Color(0xff333739),
         ),
-        titleTextStyle: const TextStyle(
+        titleTextStyle: TextStyle(
             fontFamily: 'SF-Pro-Display',
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold
         ),
-        actionsIconTheme: const IconThemeData(
+        actionsIconTheme: IconThemeData(
           color: Colors.white,
         )
     ),
-    cardColor: HexColor('333739'),
+    cardColor: const Color(0xff333739),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: true,
-      backgroundColor: HexColor('333739'),
+      backgroundColor: const Color(0xff333739),
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Colors.grey[500],
     )
 );
 
 ThemeData lightTheme=ThemeData(
-  primarySwatch: GenerateMaterialColor().generateMaterialColor(pink),
+  primarySwatch: GenerateMaterialColor()
+      .generateMaterialColor(Colors.black87),
     scaffoldBackgroundColor: Colors.white,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.black87,
+      foregroundColor: Colors.white,
+      elevation: 0,
+      shape: RoundedRectangleBorder(),
     ),
     iconTheme: const IconThemeData(
       color: Colors.black,

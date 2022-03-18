@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
-import 'package:todo/notifications/notifications.dart';
 import 'package:todo/screens/notifiications/notifications_screen.dart';
+import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class HomeHead extends StatelessWidget {
@@ -20,7 +20,7 @@ class HomeHead extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: Row(
               children: [
-                Text("Tasks",
+                Text("tasks".tr,
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2!
@@ -45,8 +45,8 @@ class HomeHead extends StatelessWidget {
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 3),
                           child: CircleAvatar(
-                            radius: 5,
-                            backgroundColor: Colors.red,
+                            radius: 4.5,
+                            backgroundColor: pink,
                           ),
                         ),
                       ],

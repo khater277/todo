@@ -18,7 +18,6 @@ class EditTasksScreen extends StatelessWidget {
       builder: (context,state){
         TodoCubit cubit = TodoCubit.get(context);
         return Scaffold(
-          //backgroundColor: Colors.white,
           appBar: AppBar(
             leading: IconButton(
                 onPressed: (){

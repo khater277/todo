@@ -1,9 +1,53 @@
+import 'package:day_night_time_picker/lib/constants.dart';
+import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
 
+class DefaultBackButton extends StatelessWidget {
+  const DefaultBackButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: (){Get.back();},
+      icon: Icon(
+        languageFun(ar: IconBroken.Arrow___Right_2, en: IconBroken.Arrow___Left_2)
+      ),
+    );
+  }
+}
+
+
+void timePicker(context,cubit){
+  Navigator.of(context).push(
+    showPicker(
+      context: context,
+      accentColor: !isDarkMode!?Colors.black87:Colors.white,
+      unselectedColor: !isDarkMode!?Colors.black26:Colors.white30,
+      value: TimeOfDay.now(),
+      onChange: (value){},
+      //iosStylePicker: true,
+      minuteInterval: MinuteInterval.ONE,
+      // Optional onChange to receive value as DateTime
+      onChangeDateTime: (DateTime dateTime) {
+        //print(dateTime);
+        cubit.setTaskTime(dateTime);
+      },
+      okStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
+        fontSize: 16,
+        color: !isDarkMode!?Colors.black87:Colors.white,
+      ),
+      cancelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
+        fontSize: 16,
+        color: !isDarkMode!?Colors.black87:Colors.white,
+      ),
+    ),
+  );
+}
 
 SnackbarController showSnackBar ({
   @required BuildContext? context,

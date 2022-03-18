@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/notifications/notifications.dart';
@@ -13,6 +13,33 @@ import 'package:todo/styles/icons_broken.dart';
 class TodoCubit extends Cubit<TodoStates>{
   TodoCubit() : super(TodoInitialState());
   static TodoCubit get(context)=>BlocProvider.of(context);
+
+  //bool isDarkMode = false;
+  void changeTheme(){
+    isDarkMode = !isDarkMode!;
+    GetStorage().write('isDarkMode', isDarkMode!);
+    emit(TodoChangeThemeState());
+  }
+
+
+  void disableAppNotifications(){
+    disableNotifications = !disableNotifications!;
+    GetStorage().write('disableNotifications', disableNotifications!);
+    emit(TodoChangeThemeState());
+  }
+
+
+  void changeAppLanguage(String value){
+    lang=value;
+    GetStorage().write('lang',value)
+        .then((v){
+      Get.updateLocale(Locale(value));
+      print(lang);
+    });
+    emit(TodoChangeLanguageState());
+  }
+
+
 
   int currentIndex = 0;
   DateTime? taskTime;
@@ -139,12 +166,6 @@ class TodoCubit extends Cubit<TodoStates>{
       }
     }
 
-    // DateTime completeTaskDate =DateTime(task.dateTime!.year,
-    //     task.dateTime!.month,task.dateTime!.day,task.dateTime!.hour,
-    //     task.dateTime!.minute,task.dateTime!.second);
-
-    // DateTime nowDate = DateTime(DateTime.now().year,
-    //     DateTime.now().month,DateTime.now().day);
 
     if(task.isNotification! && task.dateTime!.isBefore(DateTime.now())){
       if(isAdd==true) {
@@ -159,8 +180,6 @@ class TodoCubit extends Cubit<TodoStates>{
       dashboardTasks[2].remove(task);
     }
   }
-
-
 
 
   List<TaskModel> notificationTasks = [];
@@ -221,7 +240,9 @@ class TodoCubit extends Cubit<TodoStates>{
     tasksBox!.add(task);
     tasks.add(task);
     taskDateTime = null;
-    NotificationsHelper.zonedScheduleNotification(context: context,task: task);
+    if(!disableNotifications!) {
+      NotificationsHelper.zonedScheduleNotification(context: context,task: task);
+    }
     emit(TodoAddNewTaskState());
   }
 

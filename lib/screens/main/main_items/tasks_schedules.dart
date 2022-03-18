@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 
@@ -15,15 +16,16 @@ class ScheduleTaskText extends StatelessWidget {
       child: GestureDetector(
         onTap: (){cubit.setScheduledTask(index);},
         child: Container(
-          color: Colors.white,
+          color: Theme.of(context).scaffoldBackgroundColor,
           child: Center(
             child: RotatedBox(
               quarterTurns: -1,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25),
+                padding: EdgeInsets.symmetric(vertical: languageFun(
+                    ar: 20.0, en: 25.0)),
                 child: Text(text,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontSize: 14,
+                    fontSize: languageFun(ar: 17.0, en: 14.0),
                     color: cubit.scheduleTaskIndex==index?pink:Colors.grey.withOpacity(0.7),
                     letterSpacing: 1,
                   ),),
@@ -46,19 +48,19 @@ class TasksSchedules extends StatelessWidget {
       children: [
         ScheduleTaskText(
           cubit: cubit,
-            text: "TODAY",
+            text: "today".tr.toUpperCase(),
             index: 0,
         ),
         const SizedBox(height: 10,),
         ScheduleTaskText(
             cubit: cubit,
-            text: "TOMORROW",
+            text: "tomorrow".tr.toUpperCase(),
             index: 1,
         ),
         const SizedBox(height: 10,),
         ScheduleTaskText(
             cubit: cubit,
-            text: "THIS MONTH",
+            text: "thisMonth".tr.toUpperCase(),
             index: 2,
         ),
       ],

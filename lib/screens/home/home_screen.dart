@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:get/get.dart';
-import 'package:todo/screens/add_task/add_task_screen.dart';
 import 'package:todo/screens/drawer/drawer_screen.dart';
 import 'package:todo/screens/main/main_screen.dart';
 import 'package:todo/shared/constants.dart';
@@ -19,12 +17,13 @@ class HomeScreen extends StatelessWidget {
       child: ZoomDrawer(
           controller: zoomDrawerController,
           borderRadius: 24,
+          isRtl: languageFun(ar: true, en: false),
           style: DrawerStyle.Style1,
           openCurve: Curves.decelerate,
           closeCurve: Curves.decelerate,
           disableGesture: false,
           mainScreenTapClose: false,
-          slideWidth: MediaQuery.of(context).size.width * 0.68,
+          slideWidth: MediaQuery.of(context).size.width * languageFun(ar: 0.45, en: 0.68),
           duration: const Duration(milliseconds: 500),
           backgroundColor: Colors.white,
           showShadow: true,

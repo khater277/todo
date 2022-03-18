@@ -12,6 +12,7 @@ import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/notifications/notifications.dart';
+import 'package:todo/screens/home/home_screen.dart';
 import 'package:todo/screens/opening/opening_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/themes.dart';
@@ -26,10 +27,12 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   await GetStorage.init();
   tz.initializeTimeZones();
-
   /// get device language
   final String defaultLocale = Platform.localeName.substring(0, 2);
   defaultLang = defaultLocale;
+  isDarkMode = GetStorage().read('isDarkMode')??false;
+  disableNotifications = GetStorage().read('disableNotifications')??false;
+  lang = GetStorage().read('lang')??(defaultLang=='ar'?'ar':'en');
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
   tasksBox = await Hive.openBox('tasksBox');
@@ -75,6 +78,7 @@ class _MyAppState extends State<MyApp> {
       child: BlocConsumer<TodoCubit, TodoStates>(
         listener: (context, state) {},
         builder: (context, state) {
+          //TodoCubit cubit = TodoCubit.get(context);
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             home: Directionality(
@@ -83,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                 child: const OpeningScreen()),
             theme: lightTheme,
             darkTheme: darkTheme,
-            themeMode: ThemeMode.light,
+            themeMode: isDarkMode!?ThemeMode.dark:ThemeMode.light,
             translations: Translation(),
             locale: Locale(languageFun(ar: 'ar', en: 'en')),
             fallbackLocale: const Locale('en'),

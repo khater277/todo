@@ -10,6 +10,7 @@ class HeadImage extends StatelessWidget {
         height: 300,
         child: Image.asset(
           'assets/images/opening.png',
+          matchTextDirection: true,
           fit: BoxFit.cover,
         ));
   }

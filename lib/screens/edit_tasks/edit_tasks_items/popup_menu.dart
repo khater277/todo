@@ -17,14 +17,17 @@ class PopupMenu extends StatelessWidget {
       {
         "name":"Complete",
         "icon":IconBroken.Shield_Done,
+        "color":Colors.green,
       },
       {
         "name":"Pend",
         "icon":IconBroken.Bookmark,
+        "color":Colors.pink,
       },
       {
         "name":"Delete",
         "icon":IconBroken.Delete,
+        "color":Colors.red,
       }
     ];
 
@@ -35,8 +38,9 @@ class PopupMenu extends StatelessWidget {
               color: Theme.of(context).scaffoldBackgroundColor,
             )
         ),
-        color: (const Color(0xff010108)),
-        elevation: 0,
+        //color: !cubit.isDarkMode?const Color(0xff010108):Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 2,
         enabled: true,
         onSelected: (Map<String,dynamic>value) {
           if(value['name'] == "Delete") {
@@ -57,12 +61,12 @@ class PopupMenu extends StatelessWidget {
                 children: [
                   Expanded(child: Text(choice['name'],
                     style:Theme.of(context).textTheme.bodyText1!.copyWith(
-                      color: Theme.of(context).scaffoldBackgroundColor,
+                      //color:!cubit.isDarkMode?Colors.white:Colors.black87,
                       fontSize: 16
                     )
                     ,)),
                   //const SizedBox(width: 2,),
-                  Icon(choice['icon'],color: Colors.white,)
+                  Icon(choice['icon'],color: choice['color'],)
                 ],
               ),
             );

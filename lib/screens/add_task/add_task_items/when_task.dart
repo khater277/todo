@@ -138,40 +138,17 @@ class TimeButton extends StatelessWidget {
           child: Text(
             "Time",
             style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                color: Colors.white,
+                color: !isDarkMode!?Colors.white:Colors.black87,
                 fontSize: 16
             ),
           ),
-          color: Colors.black87,
+          color: !isDarkMode!?Colors.black87:Colors.white,
           rounded: 20,
           height: 40,
           width: 120,
           onPressed: (){
             FocusScope.of(context).unfocus();
-            Navigator.of(context).push(
-              showPicker(
-                context: context,
-                accentColor: Colors.black87,
-                unselectedColor: Colors.black26,
-                value: TimeOfDay.now(),
-                onChange: (value){},
-                //iosStylePicker: true,
-                minuteInterval: MinuteInterval.ONE,
-                // Optional onChange to receive value as DateTime
-                onChangeDateTime: (DateTime dateTime) {
-                  //print(dateTime);
-                  cubit.setTaskTime(dateTime);
-                },
-                okStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-                  fontSize: 16,
-                  color: Colors.black87,
-                ),
-                cancelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                  fontSize: 16,
-                  color: Colors.black87,
-                ),
-              ),
-            );
+            timePicker(context, cubit);
           }
       ),
     );

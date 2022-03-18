@@ -50,6 +50,8 @@ Box? tomorrowTasks;
 Box? monthTasks;
 String? lang;
 String? defaultLang;
+bool? isDarkMode;
+bool? disableNotifications;
 ZoomDrawerController zoomDrawerController = ZoomDrawerController();
 
 void printError(String? funName,String? error){
