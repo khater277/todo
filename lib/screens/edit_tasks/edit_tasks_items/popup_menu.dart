@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/shared/constants.dart';
@@ -15,17 +16,17 @@ class PopupMenu extends StatelessWidget {
 
     List<Map<String,dynamic>> items = [
       {
-        "name":"Complete",
+        "name":"complete".tr,
         "icon":IconBroken.Shield_Done,
         "color":Colors.green,
       },
       {
-        "name":"Pend",
+        "name":"pend".tr,
         "icon":IconBroken.Bookmark,
         "color":Colors.pink,
       },
       {
-        "name":"Delete",
+        "name":"delete".tr,
         "icon":IconBroken.Delete,
         "color":Colors.red,
       }
@@ -43,9 +44,9 @@ class PopupMenu extends StatelessWidget {
         elevation: 2,
         enabled: true,
         onSelected: (Map<String,dynamic>value) {
-          if(value['name'] == "Delete") {
+          if(value['name'] == "delete".tr) {
             cubit.deleteTask(index: index, task: task);
-          }else if(value['name'] == "Complete"){
+          }else if(value['name'] == "complete".tr){
             cubit.addToCompleted(index: index, task: task);
           }else{
             cubit.addToPend(index: index, task: task);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/cubit/cubit.dart';
+import 'package:get/get.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
 
@@ -10,10 +10,15 @@ class SettingsHead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 60,left: 20,right: 10,bottom: 50),
+      padding: EdgeInsets.only(
+          top: 60,
+          left: languageFun(ar: 15.0, en: 20.0),
+          right: languageFun(ar: 20.0, en: 10.0),
+          bottom: 50
+      ),
       child: Row(
         children: [
-          Text("Settings",
+          Text("settings".tr,
             style: Theme.of(context)
                 .textTheme
                 .bodyText2!

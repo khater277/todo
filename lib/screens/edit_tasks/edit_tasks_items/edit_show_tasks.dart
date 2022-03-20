@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/screens/edit_tasks/edit_tasks_items/popup_menu.dart';
@@ -16,17 +17,23 @@ class EditShowTasks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(
+          right: languageFun(ar: 20.0, en: 0.0),
+          left: languageFun(ar: 0.0, en: 20.0),
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.08),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
+                topRight: Radius.circular(languageFun(ar: 10.0, en: 0.0))
             )
           ),
           child: Padding(
-            padding: const EdgeInsets.only(
-                left: 20,bottom: 10),
+            padding: EdgeInsets.only(
+                right: languageFun(ar: 20.0, en: 10.0),
+                left: languageFun(ar: 10.0, en: 20.0),
+            ),
             child: cubit.tasks.isNotEmpty?
             ListView.builder(
                 shrinkWrap: true,
@@ -42,7 +49,7 @@ class EditShowTasks extends StatelessWidget {
                 itemCount: cubit.tasks.length
             )
             :NoItemsFounded(
-              text: "Empty",
+              text: "empty".tr,
               widget: Icon(
                 IconBroken.Document,
                 size: 60,

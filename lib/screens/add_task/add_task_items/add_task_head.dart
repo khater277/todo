@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/shared/default_widgets.dart';
@@ -18,7 +19,7 @@ class AddTaskHead extends StatelessWidget {
           const SizedBox(height: 80,),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Text("Add New",
+            child: Text("addNew".tr,
               style: Theme.of(context)
                   .textTheme
                   .bodyText2!
@@ -28,13 +29,13 @@ class AddTaskHead extends StatelessWidget {
           DefaultTextFormFiled(
             formatters: [NoLeadingSpaceFormatter()],
                 controller: taskController,
-                validateText: "Please add task first",
+                validateText: "taskError".tr,
                 heightPadding: 20,
                 widthPadding: 15,
                 textColor: !isDarkMode!?blue:Colors.white,
                 textSize: 20,
                 inputType: TextInputType.text,
-                hint: "Enter Task",
+                hint: "enterTask".tr,
                 hintColor: Colors.grey.withOpacity(0.7),
                 focusBorder: !isDarkMode!?
                 blue.withOpacity(0.55):Colors.white60,

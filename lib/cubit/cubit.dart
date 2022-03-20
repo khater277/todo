@@ -73,8 +73,8 @@ class TodoCubit extends Cubit<TodoStates>{
         isSelectedDate = true;
       }else{
         showSnackBar(
-            title: "warning",
-            content: "please set time first",
+            title: "warning".tr,
+            content: "timeError".tr,
             context: context,
             color: Colors.black87,
             fontColor: Colors.white,

@@ -7,6 +7,7 @@ import 'package:todo/screens/settings/settings_items/dark_mode.dart';
 import 'package:todo/screens/settings/settings_items/enable_notifications.dart';
 import 'package:todo/screens/settings/settings_items/language.dart';
 import 'package:todo/screens/settings/settings_items/settings_head.dart';
+import 'package:todo/shared/default_widgets.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -20,12 +21,7 @@ class SettingsScreen extends StatelessWidget {
         TodoCubit cubit = TodoCubit.get(context);
         return Scaffold(
             appBar: AppBar(
-              leading: IconButton(
-                  onPressed: (){
-                    Get.back();
-                  },
-                  icon: const Icon(IconBroken.Arrow___Left_2)
-              ),
+              leading: const DefaultBackButton(),
             ),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

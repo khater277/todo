@@ -5,6 +5,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/shared/constants.dart';
+import 'package:todo/shared/default_widgets.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class SelectDateScreen extends StatelessWidget {
@@ -21,12 +22,8 @@ class SelectDateScreen extends StatelessWidget {
         TodoCubit cubit = TodoCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-                onPressed: (){
-                  Get.back();
-                },
-                icon: const Icon(IconBroken.Arrow___Left_2)
-            ),),
+            leading: const DefaultBackButton()
+            ,),
           body: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
             child: SfDateRangePicker(
@@ -65,7 +62,8 @@ class SelectDateScreen extends StatelessWidget {
               ),
               todayHighlightColor: pink.withOpacity(0.7),
               //startRangeSelectionColor:Colors.red,
-              showTodayButton: true,
+              confirmText: 'ok'.tr,
+              cancelText: 'cancel'.tr,
               selectionMode: DateRangePickerSelectionMode.single,
               showActionButtons: true,
               onSubmit: (dynamic value){

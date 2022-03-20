@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/cubit/cubit.dart';
-import 'package:todo/shared/constants.dart';
+import 'package:get/get.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 
@@ -13,7 +12,7 @@ class NotificationsHead extends StatelessWidget {
       padding: const EdgeInsets.only(top: 60,left: 20,right: 10,bottom: 50),
       child: Row(
         children: [
-          Text("Notifications",
+          Text("notifications".tr,
             style: Theme.of(context)
                 .textTheme
                 .bodyText2!

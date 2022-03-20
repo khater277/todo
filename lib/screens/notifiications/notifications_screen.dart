@@ -5,6 +5,7 @@ import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/screens/notifiications/notifications_items/NotificationsHead.dart';
 import 'package:todo/screens/notifiications/notifications_items/notifications_show_tasks.dart';
+import 'package:todo/shared/default_widgets.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class NotificationsScreen extends StatelessWidget {
@@ -18,13 +19,7 @@ class NotificationsScreen extends StatelessWidget {
         TodoCubit cubit = TodoCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-                onPressed: (){
-                  Get.back();
-                  cubit.clearTaskTime();
-                },
-                icon: const Icon(IconBroken.Arrow___Left_2)
-            ),
+            leading: const DefaultBackButton(),
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

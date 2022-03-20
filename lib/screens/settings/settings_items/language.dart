@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
@@ -13,7 +14,7 @@ class SelectLanguage extends StatelessWidget {
     return Row(
       children: [
         Text(
-          "Language",
+          "language".tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(
               fontSize: 18,),
         ),

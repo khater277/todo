@@ -5,6 +5,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/shared/constants.dart';
+import 'package:todo/shared/default_widgets.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -26,19 +27,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
         return SafeArea(
           child: Scaffold(
               appBar: AppBar(
-                leading: IconButton(
-                    onPressed: (){
-                      Get.back();
-                    },
-                    icon: const Icon(IconBroken.Arrow___Left_2)
-                ),
+                leading: const DefaultBackButton(),
               ),
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 40,left: 20,right: 20),
-                    child: Text("Calendar",
+                    padding: const EdgeInsets.only(top: 40, left: 20, right: 20,),
+                    child: Text("calendar".tr,
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2!
@@ -48,9 +44,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 20,bottom: 40,
+                      padding: const EdgeInsets.only(top: 20,bottom: 80,
                           left: 10,right: 10),
                       child: SfDateRangePicker(
+                        cancelText: "cancel".tr,
+                        confirmText: 'ok'.tr,
                         headerHeight: 80,
                         view: DateRangePickerView.year,
                         showNavigationArrow: true,
@@ -83,7 +81,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             fontSize: 18
                         ),
                         todayHighlightColor: pink.withOpacity(0.7),
-                        showTodayButton: true,
                         //startRangeSelectionColor:Colors.red,
                         //selectionMode: DateRangePickerSelectionMode.single,
                         //showActionButtons: true,

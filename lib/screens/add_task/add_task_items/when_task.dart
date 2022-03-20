@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/shared/date_format.dart';
 import 'package:todo/shared/default_widgets.dart';
-import 'package:day_night_time_picker/day_night_time_picker.dart';
-import 'package:day_night_time_picker/lib/constants.dart';
 
 
 class WhenTask extends StatelessWidget {
@@ -15,7 +14,10 @@ class WhenTask extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.only(left: 20),
+        padding: EdgeInsets.only(
+            left: languageFun(ar: 0.0, en: 20.0),
+          right: languageFun(ar: 20.0, en: 0.0),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -23,9 +25,9 @@ class WhenTask extends StatelessWidget {
               alignment: AlignmentDirectional.topStart,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Text("When",
+                child: Text("when".tr,
                   style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontSize: 16,
+                    fontSize: languageFun(ar: 20.0, en: 16.0),
                     letterSpacing: 1,
                   ),),
               ),
@@ -35,9 +37,11 @@ class WhenTask extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.grey.withOpacity(0.08),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  bottomLeft: Radius.circular(10)
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
+                  bottomLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
+                  topRight: Radius.circular(languageFun(ar: 10.0, en: 0.0)),
+                  bottomRight: Radius.circular(languageFun(ar: 10.0, en: 0.0)),
                 )
               ),
               child: Row(
@@ -49,7 +53,7 @@ class WhenTask extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.0),
                       child: Center(
                         child: TaskDate(
-                          text: "Today",color: cubit.currentIndex==0?
+                          text: "today".tr,color: cubit.currentIndex==0?
                         pink:Colors.grey.withOpacity(0.8),
                         ),
                       ),
@@ -61,7 +65,7 @@ class WhenTask extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.0),
                       child: Center(
                         child: TaskDate(
-                          text: "Tomorrow",color: cubit.currentIndex==1?
+                          text: "tomorrow".tr,color: cubit.currentIndex==1?
                         pink:Colors.grey.withOpacity(0.8),
                         ),
                       ),
@@ -73,7 +77,7 @@ class WhenTask extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.0),
                       child: Center(
                         child: TaskDate(
-                          text: "Select Date",color: cubit.currentIndex==2?
+                          text: "selectDate".tr,color: cubit.currentIndex==2?
                         pink:Colors.grey.withOpacity(0.8),
                         ),
                       ),
@@ -115,7 +119,7 @@ class TaskDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 25),
+      padding: EdgeInsets.symmetric(vertical: languageFun(ar: 22.0, en: 25.0)),
       child: Text(text,
         style: Theme.of(context).textTheme.bodyText1!.copyWith(
           fontSize: 17,
@@ -133,10 +137,13 @@ class TimeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 5,left: 20),
+      padding: EdgeInsets.only(
+          right: languageFun(ar: 20.0, en: 5.0),
+          left: languageFun(ar: 5.0, en: 20.0)
+      ),
       child: DefaultElevatedButton(
           child: Text(
-            "Time",
+            "time".tr,
             style: Theme.of(context).textTheme.bodyText2!.copyWith(
                 color: !isDarkMode!?Colors.white:Colors.black87,
                 fontSize: 16

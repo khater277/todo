@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 
@@ -10,7 +11,7 @@ class DisableNotifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text("Disable Notifications",
+        Text("disableNotifications".tr,
           style: Theme.of(context)
               .textTheme
               .bodyText1!
@@ -19,10 +20,10 @@ class DisableNotifications extends StatelessWidget {
         const Spacer(),
         Switch(
             value: disableNotifications!,
-            activeTrackColor: isDarkMode!?Colors.white:Colors.black54,
-            activeColor: isDarkMode!?Colors.white:Colors.black54,
-            inactiveThumbColor: isDarkMode!?Colors.white38:Colors.black54,
-            inactiveTrackColor: isDarkMode!?Colors.white38:Colors.black54,
+            activeTrackColor: pink.withOpacity(0.4),
+            inactiveTrackColor: Colors.grey.withOpacity(0.5),
+            activeColor: pink.withOpacity(0.8),
+            inactiveThumbColor: Colors.grey,
             onChanged: (value){
               cubit.disableAppNotifications();
             }

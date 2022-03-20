@@ -11,23 +11,21 @@ class OpeningScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          width: double.infinity,
-          color: const Color(0xffFE4775),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 50),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                HeadImage(),
-                SizedBox(
-                  height: 50,
-                ),
-                WelcomeText(),
-                NextButton(),
-              ],
-            ),
+      body: Container(
+        width: double.infinity,
+        color: const Color(0xffFE4775),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 50),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              HeadImage(),
+              SizedBox(
+                height: 50,
+              ),
+              WelcomeText(),
+              NextButton(),
+            ],
           ),
         ),
       ),

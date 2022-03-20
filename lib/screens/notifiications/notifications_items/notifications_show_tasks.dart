@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/shared/constants.dart';
@@ -25,7 +26,11 @@ class NotificationsShowTasks extends StatelessWidget {
                 topRight: Radius.circular(20)
               )),
           child: Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 10),
+            padding: EdgeInsets.only(
+                left: languageFun(ar: 0.0, en: 20.0),
+                right: languageFun(ar: 20.0, en: 0.0),
+                bottom: 10
+            ),
             child: cubit.notificationTasks.isNotEmpty
                 ? ListView.builder(
                     shrinkWrap: true,
@@ -40,7 +45,7 @@ class NotificationsShowTasks extends StatelessWidget {
                     },
                     itemCount: cubit.notificationTasks.length)
                 : NoItemsFounded(
-                    text: "there is no notifications yet",
+                    text: "noNotifications".tr,
                     widget: Icon(
                       IconBroken.Notification,
                       size: 60,
@@ -73,7 +78,7 @@ class NotificationsTaskText extends StatelessWidget {
         task.dateTime!.day);
 
     String date = todayDate==taskDayDate
-        ? DateFormatter().time(task.dateTime!.toString())
+        ? "Today at ${DateFormatter().time(task.dateTime!.toString())}"
         : DateFormatter()
         .dateFormat(task.dateTime!.toString())!['date']!;
 
@@ -83,7 +88,7 @@ class NotificationsTaskText extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Today at $date",
+              Text(date,
                   style: TextStyle(
                     fontSize: 13,
                     color: Colors.grey,

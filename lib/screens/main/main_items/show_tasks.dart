@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/shared/constants.dart';
@@ -104,7 +105,12 @@ class ShowTasks extends StatelessWidget {
             )
         ),
         child: Padding(
-            padding: const EdgeInsets.only(right: 10,left: 15,bottom: 10,top: 10),
+            padding: EdgeInsets.only(
+                right: languageFun(ar: 15.0, en: 10.0),
+                left: languageFun(ar: 10.0, en: 15.0),
+                bottom: 10,
+                top: 10
+            ),
             child: cubit.allTasks[cubit.scheduleTaskIndex].isNotEmpty
                 ? ListView.separated(
                     shrinkWrap: true,
@@ -119,7 +125,7 @@ class ShowTasks extends StatelessWidget {
                         ),
                     itemCount: cubit.allTasks[cubit.scheduleTaskIndex].length)
                 : NoItemsFounded(
-                    text: "Empty",
+                    text: "empty".tr,
                     widget: Icon(
                       IconBroken.Document,
                       size: 60,

@@ -1,5 +1,7 @@
 
 import 'dart:io';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +14,6 @@ import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/notifications/notifications.dart';
-import 'package:todo/screens/home/home_screen.dart';
 import 'package:todo/screens/opening/opening_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/themes.dart';
@@ -39,7 +40,12 @@ void main() async {
 
   NotificationsHelper.init();
 
-  runApp(const MyApp());
+  runApp(
+      DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (context) => const MyApp(), // Wrap your app
+      )
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -81,6 +87,7 @@ class _MyAppState extends State<MyApp> {
           //TodoCubit cubit = TodoCubit.get(context);
           return GetMaterialApp(
             debugShowCheckedModeBanner: false,
+            useInheritedMediaQuery: true,
             home: Directionality(
                 textDirection:
                     languageFun(ar: TextDirection.rtl, en: TextDirection.ltr),
@@ -98,7 +105,7 @@ class _MyAppState extends State<MyApp> {
               defaultScale: true,
               breakpoints: [
                 const ResponsiveBreakpoint.resize(375, name: MOBILE),
-                const ResponsiveBreakpoint.resize(800, name: TABLET),
+                const ResponsiveBreakpoint.autoScale(600, name: TABLET),
                 const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
               ],
             ),

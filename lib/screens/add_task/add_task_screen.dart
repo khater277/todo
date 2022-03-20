@@ -41,7 +41,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   Get.back();
                   cubit.clearTaskTime();
                 },
-                icon: const Icon(IconBroken.Arrow___Left_2)
+                icon: Icon(
+                  languageFun(ar: IconBroken.Arrow___Right_2, en: IconBroken.Arrow___Left_2)
+                )
             ),
           ),
           body: Form(
@@ -68,7 +70,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 ),
                 DefaultElevatedButton(
                     child:Text(
-                      "Add Task",
+                      "addTask".tr,
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
                           fontSize: 21,
                           color: !isDarkMode!?Colors.white:Colors.black87
@@ -81,8 +83,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       if(_formKey.currentState!.validate()){
                         if(cubit.taskDateTime==null) {
                           showSnackBar(
-                              title: "warning",
-                              content: "please set time first",
+                              title: "warning".tr,
+                              content: "timeError".tr,
                               context: context,
                               color: Colors.black87,
                               fontColor: Colors.white,
@@ -91,8 +93,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         }else{
                           FocusScope.of(context).unfocus();
                           showSnackBar(
-                              title: "Done",
-                              content: "Task added successfully",
+                              title: "done".tr,
+                              content: "taskAdded".tr,
                               context: context,
                               color: Colors.black87,
                               fontColor: Colors.white,

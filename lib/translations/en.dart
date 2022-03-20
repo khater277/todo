@@ -14,6 +14,7 @@ Map<String,String> en = {
   'today':"Today",
   'tomorrow':"Tomorrow",
   'thisMonth':"This Month",
+  'selectDate':"Select Date",
   'empty':"Empty",
   'notifications':"Notifications",
   'noNotifications':"there is no notifications yet",
@@ -35,4 +36,7 @@ Map<String,String> en = {
   'taskAdded':"Task added successfully",
   'ok':"OK",
   'cancel':"CANCEL",
+  'complete':"Complete",
+  'pend':"Pend",
+  'delete':"Delete",
 };

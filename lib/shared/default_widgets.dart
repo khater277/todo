@@ -26,12 +26,14 @@ void timePicker(context,cubit){
   Navigator.of(context).push(
     showPicker(
       context: context,
+      cancelText: "cancel".tr,
+      okText: 'ok'.tr,
       accentColor: !isDarkMode!?Colors.black87:Colors.white,
       unselectedColor: !isDarkMode!?Colors.black26:Colors.white30,
       value: TimeOfDay.now(),
       onChange: (value){},
       //iosStylePicker: true,
-      minuteInterval: MinuteInterval.ONE,
+      minuteInterval: MinuteInterval.FIVE,
       // Optional onChange to receive value as DateTime
       onChangeDateTime: (DateTime dateTime) {
         //print(dateTime);

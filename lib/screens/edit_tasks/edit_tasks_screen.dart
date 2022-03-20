@@ -6,6 +6,7 @@ import 'package:todo/cubit/states.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/screens/edit_tasks/edit_tasks_items/edit_show_tasks.dart';
 import 'package:todo/screens/edit_tasks/edit_tasks_items/edit_tasks_head.dart';
+import 'package:todo/shared/default_widgets.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class EditTasksScreen extends StatelessWidget {
@@ -19,12 +20,7 @@ class EditTasksScreen extends StatelessWidget {
         TodoCubit cubit = TodoCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-                onPressed: (){
-                  Get.back();
-                },
-                icon: const Icon(IconBroken.Arrow___Left_2)
-            ),
+            leading: const DefaultBackButton()
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
