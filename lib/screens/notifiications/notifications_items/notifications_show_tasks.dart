@@ -32,26 +32,33 @@ class NotificationsShowTasks extends StatelessWidget {
                 bottom: 10
             ),
             child: cubit.notificationTasks.isNotEmpty
-                ? ListView.builder(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      TaskModel task = cubit.notificationTasks[index];
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        child: NotificationsTaskInfo(
+                ?
+            ListView.builder(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  TaskModel task = cubit.notificationTasks[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    child: Column(
+                      children: [
+                        // Text("${cubit.notificationTasks.length}"),
+                        NotificationsTaskInfo(
                             cubit: cubit, index: index, task: task),
-                      );
-                    },
-                    itemCount: cubit.notificationTasks.length)
-                : NoItemsFounded(
-                    text: "noNotifications".tr,
-                    widget: Icon(
-                      IconBroken.Notification,
-                      size: 60,
-                      color: Colors.grey[500],
+                      ],
                     ),
-                  ),
+                  );
+                },
+                itemCount: cubit.notificationTasks.length)
+                :
+            NoItemsFounded(
+              text: "noNotifications".tr,
+              widget: Icon(
+                IconBroken.Notification,
+                size: 60,
+                color: Colors.grey[500],
+              ),
+            ),
           ),
         ),
       ),

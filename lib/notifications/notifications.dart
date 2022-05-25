@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:timezone/timezone.dart' as tz;
 import 'package:rxdart/subjects.dart';
+import 'package:timezone/timezone.dart' as tz;
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
-import 'package:todo/screens/dashboard/dashboard_screen.dart';
 import 'package:todo/screens/notifiications/notifications_screen.dart';
-import 'package:todo/shared/constants.dart';
 
 class ReceivedNotification {
   ReceivedNotification({
@@ -106,15 +104,11 @@ class NotificationsHelper{
     });
   }
 
-  static void configureSelectNotificationSubject() {
+  static void configureSelectNotificationSubject(TodoCubit cubit) {
     NotificationsHelper.selectNotificationSubject.stream.listen((String? payload) async {
-      debugPrint("$payload dddddddddddddddddddd");
-      int index = int.parse(payload!);
-      // TaskModel task = tasksBox!.getAt(index);
-      // TodoCubit.get(context).notificationTasks.add(task);
+      debugPrint("$payload");
+      cubit.getNotificationTasks();
         Get.to(()=>const NotificationsScreen());
-        //print(TodoCubit.get(context).notificationTasks);
-      //await Navigator.pushNamed(context, '/secondPage');
     });
   }
 

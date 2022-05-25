@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:hive/hive.dart';
+import 'package:todo/models/TaskModel.dart';
 
 
 class GenerateMaterialColor{
@@ -44,10 +45,7 @@ class GenerateMaterialColor{
 
 const Color pink = Color(0xffFE4775);
 const Color blue = Color(0xff161060);
-Box? tasksBox;
-Box? todayTasks;
-Box? tomorrowTasks;
-Box? monthTasks;
+Box<TaskModel>? tasksBox;
 String? lang;
 String? defaultLang;
 bool? isDarkMode;

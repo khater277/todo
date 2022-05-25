@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/screens/drawer/drawer_screen.dart';
 import 'package:todo/screens/main/main_screen.dart';
 import 'package:todo/shared/constants.dart';
@@ -16,7 +17,7 @@ class HomeScreen extends StatelessWidget {
       },
       child: ZoomDrawer(
           controller: zoomDrawerController,
-          borderRadius: 24,
+          borderRadius: 20.sp,
           isRtl: languageFun(ar: true, en: false),
           style: DrawerStyle.Style1,
           openCurve: Curves.decelerate,

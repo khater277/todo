@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/shared/constants.dart';
@@ -26,7 +27,7 @@ class TaskText extends StatelessWidget {
       children: [
         Text(dateTime,
             style: TextStyle(
-              fontSize: 11,
+              fontSize: 10.sp,
               color: Colors.grey,
               letterSpacing: 0.5,
               fontFamily: "Avenir-Medium",
@@ -34,8 +35,8 @@ class TaskText extends StatelessWidget {
                   isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
               decorationColor: pink,
             )),
-        const SizedBox(
-          height: 2,
+        SizedBox(
+          height: 0.4.h,
         ),
         Text(
           text,
@@ -44,7 +45,7 @@ class TaskText extends StatelessWidget {
               isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
               decorationColor: pink,
               decorationThickness: 2,
-              fontSize: 20,
+              fontSize: 16.5.sp,
               letterSpacing: 0.5),
         ),
       ],
@@ -67,9 +68,7 @@ class TaskInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (index == 0)
-          const SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 1.5.h,),
         TaskText(
             text: "${task.name}",
             dateTime: cubit.scheduleTaskIndex != 2
@@ -78,9 +77,7 @@ class TaskInfo extends StatelessWidget {
                     .dateFormat(task.dateTime!.toString())!['date']!,
             isCompleted: task.isCompleted!),
         if (index == tasksBox!.length - 1)
-          const SizedBox(
-            height: 60,
-          )
+          SizedBox(height: 8.5.h,)
       ],
     );
   }
@@ -100,16 +97,16 @@ class ShowTasks extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.08),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
-              topRight: Radius.circular(languageFun(ar: 10.0, en: 0.0))
+              topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.sp)),
+              topRight: Radius.circular(languageFun(ar: 10.sp, en: 0.0))
             )
         ),
         child: Padding(
             padding: EdgeInsets.only(
-                right: languageFun(ar: 15.0, en: 10.0),
-                left: languageFun(ar: 10.0, en: 15.0),
-                bottom: 10,
-                top: 10
+                right: languageFun(ar: 4.2.w, en: 3.5.w),
+                left: languageFun(ar: 3.5.w, en: 4.2.w),
+                bottom: 1.4.h,
+                top: 1.4.h
             ),
             child: cubit.allTasks[cubit.scheduleTaskIndex].isNotEmpty
                 ? ListView.separated(
@@ -120,15 +117,15 @@ class ShowTasks extends StatelessWidget {
                           cubit.allTasks[cubit.scheduleTaskIndex][index];
                       return TaskInfo(cubit: cubit, index: index, task: task);
                     },
-                    separatorBuilder: (context, index) => const SizedBox(
-                          height: 30,
+                    separatorBuilder: (context, index) => SizedBox(
+                          height: 4.2.h,
                         ),
                     itemCount: cubit.allTasks[cubit.scheduleTaskIndex].length)
                 : NoItemsFounded(
                     text: "empty".tr,
                     widget: Icon(
                       IconBroken.Document,
-                      size: 60,
+                      size: 50.sp,
                       color: Colors.grey[500],
                     ),
                   )),
@@ -152,23 +149,19 @@ class DeleteButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         if (index == 0)
-          const SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 1.4.h,),
         GestureDetector(
             onTap: () {
               cubit.deleteTask(index: index, task: task);
               //tasks.deleteAt(index);
             },
-            child: const Icon(
+            child: Icon(
               IconBroken.Delete,
-              size: 20,
+              size: 16.sp,
               color: Colors.red,
             )),
         if (index == tasksBox!.length - 1)
-          const SizedBox(
-            height: 60,
-          )
+           SizedBox(height: 8.4.h,)
       ],
     );
   }

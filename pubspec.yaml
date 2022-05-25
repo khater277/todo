@@ -36,7 +36,8 @@ dependencies:
   hexcolor: ^2.0.5
   progress_indicators: ^1.0.0
   device_preview: ^1.0.0
-  responsive_framework: ^0.1.5
+  sizer: ^2.0.15
+#  responsive_framework: ^0.1.5
   hive: ^2.0.6
   hive_flutter: ^1.1.0
   syncfusion_flutter_datepicker: ^19.4.55

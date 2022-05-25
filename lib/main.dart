@@ -1,14 +1,14 @@
-
 import 'dart:io';
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:sizer/sizer.dart';
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:todo/cubit/bloc_observer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
@@ -18,8 +18,6 @@ import 'package:todo/screens/opening/opening_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/themes.dart';
 import 'package:todo/translations/translation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:timezone/data/latest.dart' as tz;
 
 
 //
@@ -40,16 +38,28 @@ void main() async {
 
   NotificationsHelper.init();
 
-  runApp(
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => const MyApp(), // Wrap your app
-      )
-  );
+  // runApp(
+  //     DevicePreview(
+  //       enabled: !kReleaseMode,
+  //       builder: (context) => const MyApp(), // Wrap your app
+  //     )
+  // );
+
+  runApp(BlocProvider(
+    create: (BuildContext context) => TodoCubit()..getAllTasks(),
+      child: BlocConsumer<TodoCubit,TodoStates>(
+        listener: (BuildContext context, state) {},
+        builder: (BuildContext context, state) {
+          TodoCubit cubit = TodoCubit.get(context);
+          return MyApp(cubit: cubit,);
+        },
+      ),
+  ));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final TodoCubit cubit;
+  const MyApp({Key? key, required this.cubit}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -61,7 +71,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     NotificationsHelper.configureDidReceiveLocalNotificationSubject(context);
-    NotificationsHelper.configureSelectNotificationSubject();
+    NotificationsHelper.configureSelectNotificationSubject(widget.cubit);
   }
 
   @override
@@ -79,39 +89,29 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitDown,
     ]);
 
-    return BlocProvider(
-      create: (BuildContext context) => TodoCubit()..getAllTasks(),
-      child: BlocConsumer<TodoCubit, TodoStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          //TodoCubit cubit = TodoCubit.get(context);
-          return GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            useInheritedMediaQuery: true,
-            home: Directionality(
-                textDirection:
-                    languageFun(ar: TextDirection.rtl, en: TextDirection.ltr),
-                child: const OpeningScreen()),
-            theme: lightTheme,
-            darkTheme: darkTheme,
-            themeMode: isDarkMode!?ThemeMode.dark:ThemeMode.light,
-            translations: Translation(),
-            locale: Locale(languageFun(ar: 'ar', en: 'en')),
-            fallbackLocale: const Locale('en'),
-            builder: (context, widget) => ResponsiveWrapper.builder(
-              ClampingScrollWrapper.builder(context, widget!),
-              maxWidth: 1200,
-              minWidth: 375,
-              defaultScale: true,
-              breakpoints: [
-                const ResponsiveBreakpoint.resize(375, name: MOBILE),
-                const ResponsiveBreakpoint.autoScale(600, name: TABLET),
-                const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-              ],
-            ),
-          );
-        },
-      ),
+    return BlocConsumer<TodoCubit, TodoStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        //TodoCubit cubit = TodoCubit.get(context);
+        return Sizer(
+          builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
+            return GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              useInheritedMediaQuery: true,
+              home: Directionality(
+                  textDirection:
+                  languageFun(ar: TextDirection.rtl, en: TextDirection.ltr),
+                  child: const OpeningScreen()),
+              theme: lightTheme,
+              darkTheme: darkTheme,
+              themeMode: isDarkMode!?ThemeMode.dark:ThemeMode.light,
+              translations: Translation(),
+              locale: Locale(languageFun(ar: 'ar', en: 'en')),
+              fallbackLocale: const Locale('en'),
+            );
+          },
+        );
+      },
     );
   }
 }

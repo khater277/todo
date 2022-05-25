@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 
@@ -22,10 +23,10 @@ class ScheduleTaskText extends StatelessWidget {
               quarterTurns: -1,
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: languageFun(
-                    ar: 20.0, en: 25.0)),
+                    ar: 2.8.h, en: 3.5.h)),
                 child: Text(text,
                   style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontSize: languageFun(ar: 17.0, en: 14.0),
+                    fontSize: languageFun(ar: 13.sp, en: 11.5.sp),
                     color: cubit.scheduleTaskIndex==index?pink:Colors.grey.withOpacity(0.7),
                     letterSpacing: 1,
                   ),),
@@ -51,13 +52,13 @@ class TasksSchedules extends StatelessWidget {
             text: "today".tr.toUpperCase(),
             index: 0,
         ),
-        const SizedBox(height: 10,),
+        SizedBox(height: 1.4.h,),
         ScheduleTaskText(
             cubit: cubit,
             text: "tomorrow".tr.toUpperCase(),
             index: 1,
         ),
-        const SizedBox(height: 10,),
+        SizedBox(height: 1.4.h,),
         ScheduleTaskText(
             cubit: cubit,
             text: "thisMonth".tr.toUpperCase(),

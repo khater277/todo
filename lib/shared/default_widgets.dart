@@ -33,7 +33,7 @@ void timePicker(context,cubit){
       value: TimeOfDay.now(),
       onChange: (value){},
       //iosStylePicker: true,
-      minuteInterval: MinuteInterval.FIVE,
+      minuteInterval: MinuteInterval.ONE,
       // Optional onChange to receive value as DateTime
       onChangeDateTime: (DateTime dateTime) {
         //print(dateTime);

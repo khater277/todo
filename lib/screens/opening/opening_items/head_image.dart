@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class HeadImage extends StatelessWidget {
   const HeadImage({Key? key}) : super(key: key);
@@ -6,8 +7,8 @@ class HeadImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 350,
-        height: 300,
+        width: 97.w,
+        height: 42.h,
         child: Image.asset(
           'assets/images/opening.png',
           matchTextDirection: true,

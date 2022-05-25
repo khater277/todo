@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/screens/calendar/calendar_screen.dart';
 import 'package:todo/screens/dashboard/dashboard_screen.dart';
 import 'package:todo/screens/edit_tasks/edit_tasks_screen.dart';
@@ -18,7 +19,7 @@ class DrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: isSub!=true?20:14),
+      padding: EdgeInsets.symmetric(vertical: isSub!=true?2.8.h:1.7.h),
       child: SizedBox(
         width: MediaQuery.of(context)
             .size.width-(MediaQuery.of(context).size.width * languageFun(
@@ -29,15 +30,15 @@ class DrawerItem extends StatelessWidget {
             Row(
               children: [
                 Icon(icon!,
-                size: 22,
+                size: 18.sp,
                 color: Colors.white,),
-                const SizedBox(width: 5,),
+                SizedBox(width: 1.5.w,),
               ],
             ),
             Flexible(
               child: Text(text,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                    fontSize: isSub!=true?20:14,
+                    fontSize: isSub!=true?16.sp:11.5.sp,
                     color: Colors.white,
                     letterSpacing: 0.5
                 ),),
@@ -58,7 +59,7 @@ class DrawerScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
       body: Padding(
-        padding: const EdgeInsets.only(top: 120,left: 20),
+        padding: EdgeInsets.only(top: 17.h,left: 5.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -66,11 +67,11 @@ class DrawerScreen extends StatelessWidget {
               'agenda'.tr,
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
                 color: Colors.white,
-                fontSize: 30,
+                fontSize: 25.sp,
                 letterSpacing: 2
               ),
             ),
-            const SizedBox(height: 30,),
+            SizedBox(height: 4.h,),
             GestureDetector(
                 onTap: (){Get.to(()=>const DashboardScreen());},
                 child: DrawerItem(text: "dashboard".tr,icon: IconBroken.Category,)
@@ -87,7 +88,7 @@ class DrawerScreen extends StatelessWidget {
                 onTap: (){Get.to(()=>const SettingsScreen());},
                 child: DrawerItem(text: "settings".tr,icon: IconBroken.Setting,)
             ),
-            const SizedBox(height: 30,),
+            SizedBox(height: 4.h,),
             DrawerItem(text: "about".tr,isSub: true,),
             DrawerItem(text: "privacy".tr,isSub: true,),
             DrawerItem(text: "contactUs".tr,isSub: true,),
