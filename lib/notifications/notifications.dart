@@ -134,9 +134,9 @@ class NotificationsHelper{
 }) async {
     tz.TZDateTime tzDate = tz.TZDateTime
     .from(task.dateTime!, tz.local);
-    //TodoCubit.get(context).notificationTasks.add(task);
+    int id = DateTime.now().millisecondsSinceEpoch;
     await notifications.zonedSchedule(
-        0,
+        id,
         'Hey there',
         'you have scheduled task to do now',
         tzDate,

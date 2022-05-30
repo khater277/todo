@@ -52,8 +52,8 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
-            shrinkResources false
+            // TODO: Add your own signing config for the release build.
+            signingConfig signingConfigs.debug
         }
     }
 }
