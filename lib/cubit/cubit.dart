@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:todo/cubit/states.dart';
@@ -246,21 +247,23 @@ class TodoCubit extends Cubit<TodoStates>{
     tasks.add(task);
     taskDateTime = null;
     if(!disableNotifications!) {
-      NotificationsHelper.zonedScheduleNotification(context: context,task: task);
+      int id = (dateTime.millisecondsSinceEpoch/1000).floor();
+      NotificationsHelper.zonedScheduleNotification(
+          context: context,task: task,id:id);
     }
-    print(Duration(seconds: DateTime.now().difference(dateTime).inSeconds));
     Future.delayed(Duration(seconds: dateTime.difference(DateTime.now()).inSeconds+1))
         .then((value){
           getNotificationTasks(isAdd: true);
     });
+    print(dateTime.millisecondsSinceEpoch);
     emit(TodoAddNewTaskState());
   }
 
-  void deleteTask({@required int? index,@required TaskModel? task}){
+  void deleteTask({@required int? index,@required TaskModel? task})async{
     int taskIndex = tasks.indexOf(task!);
     tasksBox!.deleteAt(taskIndex);
-    //tasks.remove(task);
     taskOperation(task: task, isAdd: false);
+    await FlutterLocalNotificationsPlugin().cancel((task.dateTime!.millisecondsSinceEpoch/1000).floor());
     emit(TodoDeleteTaskState());
   }
 

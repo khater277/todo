@@ -10,8 +10,6 @@ import 'package:todo/screens/main/main_items/show_tasks.dart';
 import 'package:todo/screens/main/main_items/tasks_schedules.dart';
 import 'package:todo/shared/constants.dart';
 
-import '../test.dart';
-
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
 

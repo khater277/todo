@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
@@ -28,9 +29,10 @@ class EditTasksHead extends StatelessWidget {
           ),
           const Spacer(),
           IconButton(
-              onPressed: (){
+              onPressed: ()async{
                 tasksBox!.deleteAll(tasksBox!.keys);
                 TodoCubit.get(context).getAllTasks();
+                await FlutterLocalNotificationsPlugin().cancelAll();
               },
               icon: const Icon(IconBroken.Delete,
               color: Colors.red,size: 22,)

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:todo/cubit/cubit.dart';
@@ -131,10 +132,10 @@ class NotificationsHelper{
   static Future<void> zonedScheduleNotification({
   required BuildContext context,
   required TaskModel task,
+  required int id,
 }) async {
     tz.TZDateTime tzDate = tz.TZDateTime
     .from(task.dateTime!, tz.local);
-    int id = DateTime.now().millisecondsSinceEpoch;
     await notifications.zonedSchedule(
         id,
         'Hey there',

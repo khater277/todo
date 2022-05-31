@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/screens/notifiications/notifications_screen.dart';
-import 'package:todo/screens/test.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
-
-import '../../../models/TaskModel.dart';
 
 class HomeHead extends StatelessWidget {
   final TodoCubit cubit;
