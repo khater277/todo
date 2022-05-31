@@ -4,8 +4,10 @@
         android:label="Agenda"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
-
-
+       <meta-data
+           android:name="com.google.firebase.messaging.default_notification_icon"
+           android:resource="@drawable/app_icon"
+           />
         <activity
             android:name=".MainActivity"
             android:exported="true"

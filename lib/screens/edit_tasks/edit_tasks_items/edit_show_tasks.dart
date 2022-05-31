@@ -15,6 +15,11 @@ class EditShowTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // List<TaskModel> tasks = cubit.tasks;
+    // tasks.sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
+
+
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(
@@ -34,19 +39,22 @@ class EditShowTasks extends StatelessWidget {
                 right: languageFun(ar: 20.0, en: 10.0),
                 left: languageFun(ar: 10.0, en: 20.0),
             ),
-            child: cubit.tasks.isNotEmpty?
+            child: cubit.sortedTasks.isNotEmpty?
             ListView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 itemBuilder:(context,index){
-                  TaskModel task =
-                  cubit.tasks[index];
+                  TaskModel task = cubit.sortedTasks[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 15),
-                    child: EditTaskInfo(cubit: cubit, index: index, task: task),
+                    child: EditTaskInfo(
+                        cubit: cubit,
+                        order: index,
+                        index: cubit.tasks.indexOf(task),
+                        task: task),
                   );
                 },
-                itemCount: cubit.tasks.length
+                itemCount: cubit.sortedTasks.length
             )
             :NoItemsFounded(
               text: "empty".tr,
@@ -73,7 +81,7 @@ class EditTaskText extends StatelessWidget {
       {Key? key,
         required this.cubit,
         required this.task,
-        required this.index})
+        required this.index,})
       : super(key: key);
 
   @override
@@ -146,10 +154,11 @@ class EditTaskText extends StatelessWidget {
 class EditTaskInfo extends StatelessWidget {
   final TodoCubit cubit;
   final int index;
+  final int order;
   final TaskModel task;
 
   const EditTaskInfo(
-      {Key? key, required this.cubit, required this.index, required this.task})
+      {Key? key, required this.cubit, required this.index, required this.task, required this.order})
       : super(key: key);
 
   @override
@@ -157,7 +166,7 @@ class EditTaskInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (index == 0)
+        if (order == 0)
           const SizedBox(
             height: 10,
           ),
@@ -166,7 +175,7 @@ class EditTaskInfo extends StatelessWidget {
           task: task,
           index: index,
         ),
-        if (index == tasksBox!.length - 1)
+        if (order == tasksBox!.length - 1)
           const SizedBox(
             height: 60,
           )

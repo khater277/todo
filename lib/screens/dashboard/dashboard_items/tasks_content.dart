@@ -14,33 +14,84 @@ class DashboardTaskText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    TodoCubit cubit = TodoCubit.get(context);
+    return Row(
       children: [
-        Text(DateFormatter()
-            .dateFormat(task.dateTime!.toString())!['date']!,
-            style: TextStyle(
-              fontSize: 11,
-              color: Colors.grey,
-              letterSpacing: 0.5,
-              fontFamily: "Avenir-Medium",
-              decoration:
-                  task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
-              decorationColor: pink,
-            )),
-        const SizedBox(
-          height: 2,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(DateFormatter()
+                  .dateFormat(task.dateTime!.toString())!['date']!,
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: Colors.grey,
+                    letterSpacing: 0.5,
+                    fontFamily: "Avenir-Medium",
+                    decoration:
+                        task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
+                    decorationColor: pink,
+                  )),
+              const SizedBox(
+                height: 2,
+              ),
+              Text(
+                task.name!,
+                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    decoration:
+                    task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
+                    decorationColor: pink,
+                    decorationThickness: 2,
+                    fontSize: 20,
+                    letterSpacing: 0.5),
+              ),
+            ],
+          ),
         ),
-        Text(
-          task.name!,
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              decoration:
-              task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
-              decorationColor: pink,
-              decorationThickness: 2,
-              fontSize: 20,
-              letterSpacing: 0.5),
-        ),
+        if(cubit.dashboardTaskIndex==0&&task.isCompleted==true)
+          GestureDetector(
+              onTap: (){
+                cubit.removeFromCompleted(index: cubit.tasks.indexOf(task), task: task);
+              },
+              child: const Icon(IconBroken.Shield_Done,size: 20,color: Colors.green,))
+        else if(cubit.dashboardTaskIndex==1&&task.isPending==true)
+          GestureDetector(
+              onTap: (){
+                cubit.removeFromPend(index: cubit.tasks.indexOf(task), task: task);
+              },
+              child: const Icon(IconBroken.Bookmark,
+                size: 20,color: pink,))
+        else
+            Row(
+              children: [
+                if(task.isPending==true)
+                Row(
+                  children: [
+                    const SizedBox(width: 15,),
+                    GestureDetector(
+                        onTap: (){
+                          cubit.removeFromPend(index: cubit.tasks.indexOf(task), task: task);
+                        },
+                        child: const Icon(IconBroken.Bookmark,size: 20,color: pink,)),
+                    //SizedBox(width: 8,)
+                  ],
+                ),
+                if(task.isCompleted==true)
+                Row(
+                  children: [
+                    const SizedBox(width: 15,),
+                    GestureDetector(
+                        onTap: (){
+                          cubit.removeFromCompleted(index: cubit.tasks.indexOf(task), task: task);
+                        },
+                        child: const Icon(IconBroken.Shield_Done,
+                          size: 20,color: Colors.green,)),
+                    //SizedBox(width: 8,)
+                  ],
+                ),
+              ],
+            ),
+
       ],
     );
   }

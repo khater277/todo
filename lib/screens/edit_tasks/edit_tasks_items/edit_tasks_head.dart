@@ -30,8 +30,10 @@ class EditTasksHead extends StatelessWidget {
           const Spacer(),
           IconButton(
               onPressed: ()async{
+
                 tasksBox!.deleteAll(tasksBox!.keys);
                 TodoCubit.get(context).getAllTasks();
+                // TodoCubit.get(context).getAllTasks();
                 await FlutterLocalNotificationsPlugin().cancelAll();
               },
               icon: const Icon(IconBroken.Delete,

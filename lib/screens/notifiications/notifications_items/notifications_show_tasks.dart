@@ -126,42 +126,6 @@ class NotificationsTaskText extends StatelessWidget {
             ],
           ),
         ),
-        if (task.isPending!)
-          Row(
-            children: [
-              const SizedBox(
-                width: 15,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    cubit.removeFromPend(index: index, task: task);
-                  },
-                  child: const Icon(
-                    IconBroken.Bookmark,
-                    size: 20,
-                    color: pink,
-                  )),
-              //SizedBox(width: 8,)
-            ],
-          ),
-        if (task.isCompleted!)
-          Row(
-            children: [
-              const SizedBox(
-                width: 15,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    cubit.removeFromCompleted(index: index, task: task);
-                  },
-                  child: const Icon(
-                    IconBroken.Shield_Done,
-                    size: 20,
-                    color: Colors.green,
-                  )),
-              //SizedBox(width: 8,)
-            ],
-          ),
         IconButton(
             onPressed: (){
               cubit.removeFromNotifications(index: index, task: task);

@@ -180,6 +180,7 @@ class TodoCubit extends Cubit<TodoStates>{
 
     if(isAdd==false){
       tasks.remove(task);
+      sortedTasks.remove(task);
       dashboardTasks[2].remove(task);
     }
   }
@@ -187,6 +188,7 @@ class TodoCubit extends Cubit<TodoStates>{
 
   List<TaskModel> notificationTasks = [];
   List<TaskModel> tasks = [];
+  List<TaskModel> sortedTasks = [];
   List<List<TaskModel>> allTasks = [[],[],[]];
   List<List<TaskModel>> dashboardTasks = [[],[],[]];
 
@@ -196,22 +198,26 @@ class TodoCubit extends Cubit<TodoStates>{
     allTasks = [[],[],[]];
     dashboardTasks = [[],[],[]];
 
+    sortedTasks = tasksBox!.values.toList();
     for (int i = 0 ; i < tasksBox!.length ; i++) {
       TaskModel? task = tasksBox!.getAt(i);
       tasks.add(task!);
       taskOperation(task: task, isAdd: true);
     }
 
-    tasks.sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
+    sortedTasks.sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
     allTasks[0].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
     allTasks[1].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
     allTasks[2].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
     dashboardTasks[0].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
     dashboardTasks[1].sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
-    dashboardTasks[2] = tasks;
+    dashboardTasks[2] = sortedTasks;
     getNotificationTasks();
     // notificationTasks.sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
     debugPrint(dashboardTasks[2].toString());
+    for (var element in sortedTasks) {
+      print(element.name);
+    }
     emit(TodoGetAllTasksState());
   }
 
@@ -245,8 +251,10 @@ class TodoCubit extends Cubit<TodoStates>{
     taskOperation(task: task, isAdd: true);
     tasksBox!.add(task);
     tasks.add(task);
+
     taskDateTime = null;
-    if(!disableNotifications!) {
+
+    if(!disableNotifications!&&task.dateTime!.isAfter(DateTime.now())) {
       int id = (dateTime.millisecondsSinceEpoch/1000).floor();
       NotificationsHelper.zonedScheduleNotification(
           context: context,task: task,id:id);
@@ -255,16 +263,17 @@ class TodoCubit extends Cubit<TodoStates>{
         .then((value){
           getNotificationTasks(isAdd: true);
     });
-    print(dateTime.millisecondsSinceEpoch);
-    emit(TodoAddNewTaskState());
+    getAllTasks();
+    // emit(TodoAddNewTaskState());
   }
 
-  void deleteTask({@required int? index,@required TaskModel? task})async{
-    int taskIndex = tasks.indexOf(task!);
-    tasksBox!.deleteAt(taskIndex);
+  void deleteTask({required int index,required TaskModel task})async{
+    // int taskIndex = tasks.indexOf(task!);
+    tasksBox!.deleteAt(index);
     taskOperation(task: task, isAdd: false);
     await FlutterLocalNotificationsPlugin().cancel((task.dateTime!.millisecondsSinceEpoch/1000).floor());
-    emit(TodoDeleteTaskState());
+    getAllTasks();
+    // emit(TodoDeleteTaskState());
   }
 
   void removeFromNotifications({required int index,required TaskModel task}){
@@ -278,7 +287,7 @@ class TodoCubit extends Cubit<TodoStates>{
     );
     tasksBox!.putAt(taskIndex,newTask);
     getAllTasks();
-    emit(TodoRemoveFromNotificationsState());
+    // emit(TodoRemoveFromNotificationsState());
   }
 
   void addToCompleted({@required int? index,@required TaskModel? task}){
@@ -291,7 +300,7 @@ class TodoCubit extends Cubit<TodoStates>{
     );
     tasksBox!.putAt(index!, newTask);
     getAllTasks();
-    emit(TodoAddToCompletedState());
+    // emit(TodoAddToCompletedState());
   }
 
   void removeFromCompleted({@required int? index,@required TaskModel? task}){
@@ -307,17 +316,19 @@ class TodoCubit extends Cubit<TodoStates>{
     emit(TodoRemoveFromCompletedState());
   }
 
-  void addToPend({@required int? index,@required TaskModel? task}){
+  void addToPend({required int index,required TaskModel task}){
     TaskModel newTask = TaskModel(
-        name: task!.name,
+        name: task.name,
         dateTime: task.dateTime,
         isCompleted: task.isCompleted,
         isPending: true,
         isNotification: task.isNotification
     );
-    tasksBox!.putAt(index!, newTask);
+    tasksBox!.putAt(index, newTask);
     getAllTasks();
-    emit(TodoAddToPendState());
+    // tasks[index]=newTask;
+    // emit(TodoAddToPendState());
+    // getAllTasks();
   }
 
   void removeFromPend({@required int? index,@required TaskModel? task}){
@@ -330,7 +341,8 @@ class TodoCubit extends Cubit<TodoStates>{
     );
     tasksBox!.putAt(index!, newTask);
     getAllTasks();
-    emit(TodoRemoveFromPendState());
+    // tasks[index]=newTask;
+    // emit(TodoRemoveFromPendState());
   }
 
 }
