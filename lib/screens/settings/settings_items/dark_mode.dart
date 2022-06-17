@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 
@@ -16,7 +17,7 @@ class DarkMode extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .bodyText1!
-              .copyWith(fontSize: 18),
+              .copyWith(fontSize: 15.sp),
         ),
         const Spacer(),
         Switch(

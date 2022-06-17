@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 
@@ -9,17 +10,17 @@ class NotificationsHead extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 60,left: 20,right: 10,bottom: 50),
+      padding: EdgeInsets.only(top: 8.38.h,left: 5.55.w,right: 2.77.w,bottom: 7.h),
       child: Row(
         children: [
           Text("notifications".tr,
             style: Theme.of(context)
                 .textTheme
                 .bodyText2!
-                .copyWith(fontSize: 32),
+                .copyWith(fontSize: 26.66.sp),
           ),
           const Spacer(),
-          const Icon(IconBroken.Notification, size: 22,)
+          Icon(IconBroken.Notification, size: 18.33.sp,)
         ],
       ),
     );

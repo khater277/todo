@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/shared/date_format.dart';
 
@@ -16,10 +17,10 @@ class DashboardHead extends StatelessWidget {
     date = date.substring(0,atIndex);
     return Padding(
       padding: EdgeInsets.only(
-          top: 60,
-          left: languageFun(ar: 10.0, en: 20.0),
-          right: languageFun(ar: 20.0, en: 10.0),
-          bottom: 50
+          top: 8.37.h,
+          left: languageFun(ar: 2.77.w, en: 5.55.w),
+          right: languageFun(ar: 5.55.w, en: 2.77.w),
+          bottom: 7.h
       ),
       child: Row(
         children: [
@@ -28,7 +29,7 @@ class DashboardHead extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodyText2!
-                  .copyWith(fontSize: 35),
+                  .copyWith(fontSize: 29.16.sp),
 
             ),
           ),
@@ -36,7 +37,7 @@ class DashboardHead extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .bodyText1!
-                .copyWith(fontSize: 15,color: Colors.grey),
+                .copyWith(fontSize: 12.5.sp,color: Colors.grey),
 
           ),
         ],

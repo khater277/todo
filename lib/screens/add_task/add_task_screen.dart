@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
-import 'package:todo/models/TaskModel.dart';
 import 'package:todo/screens/add_task/add_task_items/add_task_head.dart';
 import 'package:todo/screens/add_task/add_task_items/when_task.dart';
 import 'package:todo/shared/constants.dart';
@@ -60,7 +60,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         child: Column(
                           children: [
                             AddTaskHead(taskController: _taskController),
-                            const SizedBox(height: 20,),
+                            SizedBox(height: 2.8.h,),
                             WhenTask(cubit: cubit,),
                           ],
                         ),
@@ -72,12 +72,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     child:Text(
                       "addTask".tr,
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                          fontSize: 21,
+                          fontSize: 17.5.sp,
                           color: !isDarkMode!?Colors.white:Colors.black87
                       ),),
                     color: !isDarkMode!?Colors.black87:Colors.white,
                     rounded: 0,
-                    height: 70,
+                    height: 9.77.h,
                     width: double.infinity,
                     onPressed: (){
                       if(_formKey.currentState!.validate()){

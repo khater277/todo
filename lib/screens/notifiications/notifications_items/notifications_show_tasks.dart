@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/shared/constants.dart';
@@ -17,19 +18,19 @@ class NotificationsShowTasks extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 4.16.w),
         child: Container(
           decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.08),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20)
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.sp),
+                topRight: Radius.circular(20.sp)
               )),
           child: Padding(
             padding: EdgeInsets.only(
-                left: languageFun(ar: 0.0, en: 20.0),
-                right: languageFun(ar: 20.0, en: 0.0),
-                bottom: 10
+                left: languageFun(ar: 0.0, en: 5.55.w),
+                right: languageFun(ar: 5.55.w, en: 0.0),
+                bottom: 2.8.h
             ),
             child: cubit.notificationTasks.isNotEmpty
                 ?
@@ -39,7 +40,7 @@ class NotificationsShowTasks extends StatelessWidget {
                 itemBuilder: (context, index) {
                   TaskModel task = cubit.notificationTasks[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    padding: EdgeInsets.symmetric(vertical: 2.1.h),
                     child: Column(
                       children: [
                         // Text("${cubit.notificationTasks.length}"),
@@ -55,7 +56,7 @@ class NotificationsShowTasks extends StatelessWidget {
               text: "noNotifications".tr,
               widget: Icon(
                 IconBroken.Notification,
-                size: 60,
+                size: 50.sp,
                 color: Colors.grey[500],
               ),
             ),
@@ -97,7 +98,7 @@ class NotificationsTaskText extends StatelessWidget {
             children: [
               Text(date,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 10.8.sp,
                     color: Colors.grey,
                     letterSpacing: 0.5,
                     fontFamily: "Avenir-Medium",
@@ -106,11 +107,11 @@ class NotificationsTaskText extends StatelessWidget {
                         : TextDecoration.none,
                     decorationColor: pink,
                   )),
-              const SizedBox(
-                width: 5,
+              SizedBox(
+                width: 1.39.w,
               ),
-              const SizedBox(
-                height: 2,
+              SizedBox(
+                height: 0.28.h,
               ),
               Text(
                 task.name!,
@@ -120,7 +121,7 @@ class NotificationsTaskText extends StatelessWidget {
                         : TextDecoration.none,
                     decorationColor: pink,
                     decorationThickness: 2,
-                    fontSize: 20,
+                    fontSize: 16.66.sp,
                     letterSpacing: 0.5),
               ),
             ],
@@ -130,7 +131,7 @@ class NotificationsTaskText extends StatelessWidget {
             onPressed: (){
               cubit.removeFromNotifications(index: index, task: task);
             },
-            icon: const Icon(IconBroken.Delete,size: 20,color: Colors.red,))
+            icon: Icon(IconBroken.Delete,size: 16.66.sp,color: Colors.red,))
       ],
     );
   }
@@ -151,8 +152,8 @@ class NotificationsTaskInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (index == 0)
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: 1.4.h,
           ),
         NotificationsTaskText(
           cubit: cubit,
@@ -160,8 +161,8 @@ class NotificationsTaskInfo extends StatelessWidget {
           index: index,
         ),
         if (index == tasksBox!.length - 1)
-          const SizedBox(
-            height: 60,
+          SizedBox(
+            height: 8.38.h,
           )
       ],
     );

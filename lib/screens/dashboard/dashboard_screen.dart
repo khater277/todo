@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/screens/dashboard/dashboard_items/dashboard_head.dart';
 import 'package:todo/screens/dashboard/dashboard_items/dashboard_sidebar.dart';
 import 'package:todo/screens/dashboard/dashboard_items/tasks_content.dart';
 import 'package:todo/shared/default_widgets.dart';
-import 'package:todo/styles/icons_broken.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);

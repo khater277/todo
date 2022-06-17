@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/shared/date_format.dart';
@@ -15,8 +16,8 @@ class WhenTask extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(
-            left: languageFun(ar: 0.0, en: 20.0),
-          right: languageFun(ar: 20.0, en: 0.0),
+            left: languageFun(ar: 0.0, en: 5.55.w),
+          right: languageFun(ar: 5.55.w, en: 0.0),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -24,24 +25,24 @@ class WhenTask extends StatelessWidget {
             Align(
               alignment: AlignmentDirectional.topStart,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
+                padding: EdgeInsets.symmetric(horizontal: 1.39.w),
                 child: Text("when".tr,
                   style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontSize: languageFun(ar: 20.0, en: 16.0),
+                    fontSize: languageFun(ar: 16.66.sp, en: 13.33.sp),
                     letterSpacing: 1,
                   ),),
               ),
             ),
-            const SizedBox(height: 8,),
+            SizedBox(height: 1.117.h,),
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.grey.withOpacity(0.08),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
-                  bottomLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
-                  topRight: Radius.circular(languageFun(ar: 10.0, en: 0.0)),
-                  bottomRight: Radius.circular(languageFun(ar: 10.0, en: 0.0)),
+                  topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0.sp)),
+                  bottomLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0.sp)),
+                  topRight: Radius.circular(languageFun(ar: 10.0.sp, en: 0.0)),
+                  bottomRight: Radius.circular(languageFun(ar: 10.0.sp, en: 0.0)),
                 )
               ),
               child: Row(
@@ -86,7 +87,7 @@ class WhenTask extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10,),
+            SizedBox(height: 1.4.h,),
             Row(
               children: [
                 Expanded(
@@ -95,7 +96,7 @@ class WhenTask extends StatelessWidget {
                       DateFormatter()
                           .dateFormat(cubit.taskDateTime!.toString())!['date']!,
                       style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        fontSize: 16,
+                        fontSize: 13.33.sp,
                         letterSpacing: 1,
                         color: pink
                       ),
@@ -119,10 +120,10 @@ class TaskDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: languageFun(ar: 22.0, en: 25.0)),
+      padding: EdgeInsets.symmetric(vertical: languageFun(ar: 3.07.h, en: 3.5.h)),
       child: Text(text,
         style: Theme.of(context).textTheme.bodyText1!.copyWith(
-          fontSize: 17,
+          fontSize: 14.16.sp,
           color: color,
           letterSpacing: 1,
         ),),
@@ -138,21 +139,21 @@ class TimeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          right: languageFun(ar: 20.0, en: 5.0),
-          left: languageFun(ar: 5.0, en: 20.0)
+          right: languageFun(ar: 5.55.w, en: 1.38.w),
+          left: languageFun(ar: 1.38.w, en: 5.55.w)
       ),
       child: DefaultElevatedButton(
           child: Text(
             "time".tr,
             style: Theme.of(context).textTheme.bodyText2!.copyWith(
                 color: !isDarkMode!?Colors.white:Colors.black87,
-                fontSize: 16
+                fontSize: 13.33.sp
             ),
           ),
           color: !isDarkMode!?Colors.black87:Colors.white,
-          rounded: 20,
-          height: 40,
-          width: 120,
+          rounded: 20.sp,
+          height: 5.59.h,
+          width: 33.33.w,
           onPressed: (){
             FocusScope.of(context).unfocus();
             timePicker(context, cubit);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
-import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 class PopupMenu extends StatelessWidget {
@@ -34,7 +34,7 @@ class PopupMenu extends StatelessWidget {
 
     return PopupMenuButton(
         shape: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(15.sp),
             borderSide: BorderSide(
               color: Theme.of(context).scaffoldBackgroundColor,
             )
@@ -51,7 +51,7 @@ class PopupMenu extends StatelessWidget {
           }else{
             cubit.addToPend(index: index, task: task);
           }
-          print(value);
+          debugPrint(value.toString());
           //cubit.deletePost(index: index);
         },
         itemBuilder:(context) {
@@ -63,7 +63,7 @@ class PopupMenu extends StatelessWidget {
                   Expanded(child: Text(choice['name'],
                     style:Theme.of(context).textTheme.bodyText1!.copyWith(
                       //color:!cubit.isDarkMode?Colors.white:Colors.black87,
-                      fontSize: 16
+                      fontSize: 13.33.sp
                     )
                     ,)),
                   //const SizedBox(width: 2,),

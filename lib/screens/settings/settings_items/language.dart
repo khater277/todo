@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
@@ -16,22 +17,22 @@ class SelectLanguage extends StatelessWidget {
         Text(
           "language".tr,
           style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              fontSize: 18,),
+              fontSize: 15.sp,),
         ),
         const Spacer(),
         DropdownButton(
           dropdownColor: Theme.of(context).scaffoldBackgroundColor,
             focusColor: Theme.of(context).scaffoldBackgroundColor,
             style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              fontSize: 16,
+              fontSize: 13.33.sp,
             ),
             underline: const Text(""),
             icon: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3),
+              padding: EdgeInsets.symmetric(horizontal: 0.85.w),
               child: Icon(IconBroken.Arrow___Down_2,
               color: !isDarkMode!?Colors.black87:Colors.white,),
             ),
-            iconSize: 16,
+            iconSize: 13.33.sp,
             value: lang!,
             items: const [
               DropdownMenuItem(

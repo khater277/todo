@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
 
@@ -11,10 +12,10 @@ class SettingsHead extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          top: 60,
-          left: languageFun(ar: 15.0, en: 20.0),
-          right: languageFun(ar: 20.0, en: 10.0),
-          bottom: 50
+          top: 8.4.h,
+          left: languageFun(ar: 4.16.w, en: 5.55.w),
+          right: languageFun(ar: 5.55.w, en: 2.77.w),
+          bottom: 7.h
       ),
       child: Row(
         children: [
@@ -22,11 +23,11 @@ class SettingsHead extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .bodyText2!
-                .copyWith(fontSize: 35),
+                .copyWith(fontSize: 29.16.sp),
 
           ),
           const Spacer(),
-          const Icon(IconBroken.Setting, size: 22,)
+          const Icon(IconBroken.Setting, size: 18.33,)
         ],
       ),
     );

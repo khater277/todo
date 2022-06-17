@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo/cubit/cubit.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/shared/default_widgets.dart';
 
@@ -12,35 +12,35 @@ class AddTaskHead extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: 5.55.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 80,),
+          SizedBox(height: 11.17.h,),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.symmetric(vertical: 2.8.h),
             child: Text("addNew".tr,
               style: Theme.of(context)
                   .textTheme
                   .bodyText2!
-                  .copyWith(fontSize: 40),
+                  .copyWith(fontSize: 33.33.sp),
             ),
           ),
           DefaultTextFormFiled(
             formatters: [NoLeadingSpaceFormatter()],
                 controller: taskController,
                 validateText: "taskError".tr,
-                heightPadding: 20,
-                widthPadding: 15,
+                heightPadding: 2.8.h,
+                widthPadding: 4.16.w,
                 textColor: !isDarkMode!?blue:Colors.white,
-                textSize: 20,
+                textSize: 16.66.sp,
                 inputType: TextInputType.text,
                 hint: "enterTask".tr,
                 hintColor: Colors.grey.withOpacity(0.7),
                 focusBorder: !isDarkMode!?
                 blue.withOpacity(0.55):Colors.white60,
                 border: Colors.grey.withOpacity(0.7),
-                rounded: 5,
+                rounded: 5.sp,
               )
         ],
       ),

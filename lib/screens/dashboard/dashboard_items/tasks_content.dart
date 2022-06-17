@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/shared/constants.dart';
@@ -24,7 +25,7 @@ class DashboardTaskText extends StatelessWidget {
               Text(DateFormatter()
                   .dateFormat(task.dateTime!.toString())!['date']!,
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: 9.16.sp,
                     color: Colors.grey,
                     letterSpacing: 0.5,
                     fontFamily: "Avenir-Medium",
@@ -32,8 +33,8 @@ class DashboardTaskText extends StatelessWidget {
                         task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
                     decorationColor: pink,
                   )),
-              const SizedBox(
-                height: 2,
+              SizedBox(
+                height: 0.28.h,
               ),
               Text(
                 task.name!,
@@ -42,7 +43,7 @@ class DashboardTaskText extends StatelessWidget {
                     task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
                     decorationColor: pink,
                     decorationThickness: 2,
-                    fontSize: 20,
+                    fontSize: 16.66.sp,
                     letterSpacing: 0.5),
               ),
             ],
@@ -53,39 +54,39 @@ class DashboardTaskText extends StatelessWidget {
               onTap: (){
                 cubit.removeFromCompleted(index: cubit.tasks.indexOf(task), task: task);
               },
-              child: const Icon(IconBroken.Shield_Done,size: 20,color: Colors.green,))
+              child: Icon(IconBroken.Shield_Done,size: 16.66.sp,color: Colors.green,))
         else if(cubit.dashboardTaskIndex==1&&task.isPending==true)
           GestureDetector(
               onTap: (){
                 cubit.removeFromPend(index: cubit.tasks.indexOf(task), task: task);
               },
-              child: const Icon(IconBroken.Bookmark,
-                size: 20,color: pink,))
+              child: Icon(IconBroken.Bookmark,
+                size: 16.66.sp,color: pink,))
         else
             Row(
               children: [
                 if(task.isPending==true)
                 Row(
                   children: [
-                    const SizedBox(width: 15,),
+                    SizedBox(width: 4.16.w,),
                     GestureDetector(
                         onTap: (){
                           cubit.removeFromPend(index: cubit.tasks.indexOf(task), task: task);
                         },
-                        child: const Icon(IconBroken.Bookmark,size: 20,color: pink,)),
+                        child: Icon(IconBroken.Bookmark,size: 16.66.sp,color: pink,)),
                     //SizedBox(width: 8,)
                   ],
                 ),
                 if(task.isCompleted==true)
                 Row(
                   children: [
-                    const SizedBox(width: 15,),
+                    SizedBox(width: 4.16.w,),
                     GestureDetector(
                         onTap: (){
                           cubit.removeFromCompleted(index: cubit.tasks.indexOf(task), task: task);
                         },
-                        child: const Icon(IconBroken.Shield_Done,
-                          size: 20,color: Colors.green,)),
+                        child: Icon(IconBroken.Shield_Done,
+                          size: 16.66.sp,color: Colors.green,)),
                     //SizedBox(width: 8,)
                   ],
                 ),
@@ -112,13 +113,13 @@ class DashboardTaskInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (index == 0)
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: 1.4.h,
           ),
         DashboardTaskText(task: task,),
         if (index == tasksBox!.length - 1)
-          const SizedBox(
-            height: 60,
+          SizedBox(
+            height: 8.4.h,
           )
       ],
     );
@@ -139,16 +140,16 @@ class DashboardShowTasks extends StatelessWidget {
           decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.08),
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
-                  topRight: Radius.circular(languageFun(ar: 10.0, en: 0.0))
+                  topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0.sp)),
+                  topRight: Radius.circular(languageFun(ar: 10.0.sp, en: 0.0))
               )
           ),
         child: Padding(
             padding: EdgeInsets.only(
-                right: languageFun(ar: 15.0, en: 10.0),
-                left: languageFun(ar: 10.0, en: 15.0),
-                bottom: 10,
-                top: 10
+                right: languageFun(ar: 4.16.w, en: 2.77.w),
+                left: languageFun(ar: 2.77.w, en: 4.16.w),
+                bottom: 1.4.h,
+                top: 1.4.h
             ),
             child: cubit.dashboardTasks[cubit.dashboardTaskIndex].isNotEmpty
                 ? ListView.separated(
@@ -159,15 +160,15 @@ class DashboardShowTasks extends StatelessWidget {
                           cubit.dashboardTasks[cubit.dashboardTaskIndex][index];
                       return DashboardTaskInfo(cubit: cubit, index: index, task: task);
                     },
-                    separatorBuilder: (context, index) => const SizedBox(
-                          height: 30,
+                    separatorBuilder: (context, index) => SizedBox(
+                          height: 4.19.h,
                         ),
                     itemCount: cubit.dashboardTasks[cubit.dashboardTaskIndex].length)
                 : NoItemsFounded(
                     text: "empty".tr,
                     widget: Icon(
                       IconBroken.Document,
-                      size: 60,
+                      size: 50.sp,
                       color: Colors.grey[500],
                     ),
                   )),

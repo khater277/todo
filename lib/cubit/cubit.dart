@@ -37,7 +37,7 @@ class TodoCubit extends Cubit<TodoStates>{
     GetStorage().write('lang',value)
         .then((v){
       Get.updateLocale(Locale(value));
-      print(lang);
+      debugPrint(lang);
     });
     emit(TodoChangeLanguageState());
   }
@@ -216,7 +216,7 @@ class TodoCubit extends Cubit<TodoStates>{
     // notificationTasks.sort((a,b) => a.dateTime!.compareTo(b.dateTime!));
     debugPrint(dashboardTasks[2].toString());
     for (var element in sortedTasks) {
-      print(element.name);
+      debugPrint(element.name);
     }
     emit(TodoGetAllTasksState());
   }

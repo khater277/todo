@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/cubit/states.dart';
 import 'package:todo/screens/settings/settings_items/dark_mode.dart';
@@ -8,7 +8,6 @@ import 'package:todo/screens/settings/settings_items/enable_notifications.dart';
 import 'package:todo/screens/settings/settings_items/language.dart';
 import 'package:todo/screens/settings/settings_items/settings_head.dart';
 import 'package:todo/shared/default_widgets.dart';
-import 'package:todo/styles/icons_broken.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -28,13 +27,13 @@ class SettingsScreen extends StatelessWidget {
               children: [
                 const SettingsHead(),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 5.55.w),
                   child: Column(
                     children: [
                       DarkMode(cubit: cubit,),
-                      const SizedBox(height: 20,),
+                      SizedBox(height: 2.8.h,),
                       SelectLanguage(cubit: cubit),
-                      const SizedBox(height: 20,),
+                      SizedBox(height: 2.8.h,),
                       DisableNotifications(cubit: cubit)
                     ],
                   ),

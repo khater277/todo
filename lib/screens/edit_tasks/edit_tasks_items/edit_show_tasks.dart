@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import 'package:todo/cubit/cubit.dart';
 import 'package:todo/models/TaskModel.dart';
 import 'package:todo/screens/edit_tasks/edit_tasks_items/popup_menu.dart';
@@ -23,21 +24,21 @@ class EditShowTasks extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(
-          right: languageFun(ar: 20.0, en: 0.0),
-          left: languageFun(ar: 0.0, en: 20.0),
+          right: languageFun(ar: 5.55.w, en: 0.0),
+          left: languageFun(ar: 0.0, en: 5.55.w),
         ),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.08),
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0)),
-                topRight: Radius.circular(languageFun(ar: 10.0, en: 0.0))
+                topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.0.sp)),
+                topRight: Radius.circular(languageFun(ar: 10.0.sp, en: 0.0))
             )
           ),
           child: Padding(
             padding: EdgeInsets.only(
-                right: languageFun(ar: 20.0, en: 10.0),
-                left: languageFun(ar: 10.0, en: 20.0),
+                right: languageFun(ar: 5.55.w, en: 2.77.w),
+                left: languageFun(ar: 2.77.w, en: 5.55.w),
             ),
             child: cubit.sortedTasks.isNotEmpty?
             ListView.builder(
@@ -46,7 +47,7 @@ class EditShowTasks extends StatelessWidget {
                 itemBuilder:(context,index){
                   TaskModel task = cubit.sortedTasks[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    padding: EdgeInsets.symmetric(vertical: 2.1.h),
                     child: EditTaskInfo(
                         cubit: cubit,
                         order: index,
@@ -60,7 +61,7 @@ class EditShowTasks extends StatelessWidget {
               text: "empty".tr,
               widget: Icon(
                 IconBroken.Document,
-                size: 60,
+                size: 50.sp,
                 color: Colors.grey[500],
               ),
             ),
@@ -95,7 +96,7 @@ class EditTaskText extends StatelessWidget {
               Text(DateFormatter()
                   .dateFormat(task.dateTime!.toString())!['date']!,
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: 9.16.sp,
                     color: Colors.grey,
                     letterSpacing: 0.5,
                     fontFamily: "Avenir-Medium",
@@ -103,10 +104,8 @@ class EditTaskText extends StatelessWidget {
                     task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
                     decorationColor: pink,
                   )),
-              const SizedBox(width: 5,),
-              const SizedBox(
-                height: 2,
-              ),
+              SizedBox(width: 1.4.w,),
+              SizedBox(height: 0.28.h,),
               Text(
                 task.name!,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
@@ -114,7 +113,7 @@ class EditTaskText extends StatelessWidget {
                     task.isCompleted! ? TextDecoration.lineThrough : TextDecoration.none,
                     decorationColor: pink,
                     decorationThickness: 2,
-                    fontSize: 20,
+                    fontSize: 16.66.sp,
                     letterSpacing: 0.5),
               ),
             ],
@@ -123,25 +122,25 @@ class EditTaskText extends StatelessWidget {
         if(task.isPending!)
           Row(
             children: [
-              const SizedBox(width: 15,),
+              SizedBox(width: 4.16.w,),
               GestureDetector(
                 onTap: (){
                   cubit.removeFromPend(index: index, task: task);
                 },
-                  child: const Icon(IconBroken.Bookmark,size: 20,color: pink,)),
+                  child: Icon(IconBroken.Bookmark,size: 16.66.sp,color: pink,)),
               //SizedBox(width: 8,)
             ],
           ),
         if(task.isCompleted!)
           Row(
             children: [
-              const SizedBox(width: 15,),
+              SizedBox(width: 4.16.w,),
               GestureDetector(
                   onTap: (){
                     cubit.removeFromCompleted(index: index, task: task);
                   },
-                  child: const Icon(IconBroken.Shield_Done,
-                    size: 20,color: Colors.green,)),
+                  child: Icon(IconBroken.Shield_Done,
+                    size: 16.66.sp,color: Colors.green,)),
               //SizedBox(width: 8,)
             ],
           ),
@@ -167,18 +166,14 @@ class EditTaskInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (order == 0)
-          const SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 1.4.h,),
         EditTaskText(
             cubit: cubit,
           task: task,
           index: index,
         ),
         if (order == tasksBox!.length - 1)
-          const SizedBox(
-            height: 60,
-          )
+          SizedBox(height: 8.38.h,)
       ],
     );
   }

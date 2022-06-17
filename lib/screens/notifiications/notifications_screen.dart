@@ -6,7 +6,6 @@ import 'package:todo/cubit/states.dart';
 import 'package:todo/screens/home/home_screen.dart';
 import 'package:todo/screens/notifiications/notifications_items/NotificationsHead.dart';
 import 'package:todo/screens/notifiications/notifications_items/notifications_show_tasks.dart';
-import 'package:todo/shared/default_widgets.dart';
 import 'package:todo/styles/icons_broken.dart';
 
 import '../../shared/constants.dart';
