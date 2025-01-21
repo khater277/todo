@@ -19,39 +19,41 @@ class NextButton extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Text("opening".tr,
+                child: Text(
+                  "opening".tr,
                   style: Theme.of(context)
                       .textTheme
-                      .bodyText2!
+                      .titleMedium!
                       .copyWith(color: Colors.white, fontSize: 15.sp),
-
                 ),
               ),
               ElevatedButton(
-                onPressed:(){
-                  Get.to(()=>const HomeScreen(),curve: Curves.fastOutSlowIn);
+                onPressed: () {
+                  Get.to(() => const HomeScreen(), curve: Curves.fastOutSlowIn);
                 },
                 child: Icon(
                   languageFun(
                       ar: IconBroken.Arrow___Left_2,
-                      en: IconBroken.Arrow___Right_2
-                  ),
+                      en: IconBroken.Arrow___Right_2),
                   color: pink,
                   size: 25.sp,
                 ),
                 style: ElevatedButton.styleFrom(
                     elevation: 0,
-                    primary:Colors.white,
+                    backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius:BorderRadius.only(
-                        bottomLeft: Radius.circular(languageFun(ar: 0.0, en: 5.sp)),
-                        topLeft: Radius.circular(languageFun(ar: 0.0, en: 5.sp)),
-                        topRight: Radius.circular(languageFun(ar: 5.sp, en: 0.0)),
-                        bottomRight: Radius.circular(languageFun(ar: 5.sp, en: 0.0)),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft:
+                            Radius.circular(languageFun(ar: 0.0, en: 5.sp)),
+                        topLeft:
+                            Radius.circular(languageFun(ar: 0.0, en: 5.sp)),
+                        topRight:
+                            Radius.circular(languageFun(ar: 5.sp, en: 0.0)),
+                        bottomRight:
+                            Radius.circular(languageFun(ar: 5.sp, en: 0.0)),
                       ),
                     ),
-                    minimumSize: Size(19.5.w,7.h)
-                ),
+                    minimumSize: Size(19.5.w, 7.h)),
               )
             ],
           ),

@@ -16,13 +16,11 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-
-
   @override
   Widget build(BuildContext context) {
-    return  BlocConsumer<TodoCubit,TodoStates>(
-      listener: (context,state){},
-      builder: (context,state){
+    return BlocConsumer<TodoCubit, TodoStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
         return SafeArea(
           child: Scaffold(
               appBar: AppBar(
@@ -34,20 +32,32 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   // Text("${100.w}"),
                   Padding(
                     padding: EdgeInsets.only(
-                      top: 5.6.h, left: 5.5.w, right: 5.5.w,),
-                    child: Text("calendar".tr,
+                      top: 5.6.h,
+                      left: 5.5.w,
+                      right: 5.5.w,
+                    ),
+                    child: Text(
+                      "calendar".tr,
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText2!
+                          .titleMedium!
                           .copyWith(fontSize: 29.sp),
-
                     ),
                   ),
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(top: 2.8.h,bottom: 11.17.h,
-                          left: 2.77.w,right: 2.77.w),
+                      padding: EdgeInsets.only(
+                          top: 2.8.h,
+                          bottom: 11.17.h,
+                          left: 2.77.w,
+                          right: 2.77.w),
                       child: SfDateRangePicker(
+                        minDate: DateTime.now(),
+                        maxDate: DateTime.now().add(const Duration(days: 365)),
+                        // monthViewSettings: const DateRangePickerMonthViewSettings(
+
+                        // ),
+                        // locale: Get.locale.toString(),
                         cancelText: "cancel".tr,
                         confirmText: 'ok'.tr,
                         headerHeight: 11.17.h,
@@ -55,32 +65,38 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         showNavigationArrow: true,
                         headerStyle: DateRangePickerHeaderStyle(
                           textAlign: TextAlign.center,
-                          textStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-                              color: !isDarkMode!?blue:Colors.white,
-                              fontSize: 18.33.sp
-                          ),
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                  color: !isDarkMode! ? blue : Colors.white,
+                                  fontSize: 18.33.sp),
                         ),
                         yearCellStyle: DateRangePickerYearCellStyle(
-                          textStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: !isDarkMode!?blue:Colors.white,
-                            fontSize: 16.66.sp,
-                          ),
-                          todayTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: !isDarkMode!?blue:Colors.white,
-                            fontSize: 15.sp,
-                          ),
+                          textStyle:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    color: !isDarkMode! ? blue : Colors.white,
+                                    fontSize: 16.66.sp,
+                                  ),
+                          todayTextStyle:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    color: !isDarkMode! ? blue : Colors.white,
+                                    fontSize: 15.sp,
+                                  ),
                         ),
                         monthCellStyle: DateRangePickerMonthCellStyle(
-                          textStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                              color: !isDarkMode!?blue:Colors.white,
-                              fontSize: 16.66.sp
-                          ),
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(
+                                  color: !isDarkMode! ? blue : Colors.white,
+                                  fontSize: 16.66.sp),
                         ),
                         selectionColor: pink.withOpacity(0.7),
-                        selectionTextStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: Colors.white,
-                            fontSize: 15.sp
-                        ),
+                        selectionTextStyle: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(color: Colors.white, fontSize: 15.sp),
                         todayHighlightColor: pink.withOpacity(0.7),
                         //startRangeSelectionColor:Colors.red,
                         //selectionMode: DateRangePickerSelectionMode.single,
@@ -89,8 +105,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     ),
                   ),
                 ],
-              )
-          ),
+              )),
         );
       },
     );

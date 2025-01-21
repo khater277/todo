@@ -16,28 +16,31 @@ class SelectLanguage extends StatelessWidget {
       children: [
         Text(
           "language".tr,
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              fontSize: 15.sp,),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontSize: 15.sp,
+              ),
         ),
         const Spacer(),
         DropdownButton(
-          dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+            dropdownColor: Theme.of(context).scaffoldBackgroundColor,
             focusColor: Theme.of(context).scaffoldBackgroundColor,
-            style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              fontSize: 13.33.sp,
-            ),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  fontSize: 13.33.sp,
+                ),
             underline: const Text(""),
             icon: Padding(
               padding: EdgeInsets.symmetric(horizontal: 0.85.w),
-              child: Icon(IconBroken.Arrow___Down_2,
-              color: !isDarkMode!?Colors.black87:Colors.white,),
+              child: Icon(
+                IconBroken.Arrow___Down_2,
+                color: !isDarkMode! ? Colors.black87 : Colors.white,
+              ),
             ),
             iconSize: 13.33.sp,
             value: lang!,
             items: const [
               DropdownMenuItem(
                 child: Text(
-                    "English",
+                  "English",
                 ),
                 value: "en",
               ),
@@ -47,7 +50,7 @@ class SelectLanguage extends StatelessWidget {
               ),
             ],
             onChanged: (value) {
-            cubit.changeAppLanguage(value.toString());
+              cubit.changeAppLanguage(value.toString());
             }),
       ],
     );

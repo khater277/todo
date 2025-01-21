@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -18,7 +20,8 @@ import 'package:todo/screens/opening/opening_screen.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/themes.dart';
 import 'package:todo/translations/translation.dart';
-
+import 'package:intl/date_symbol_data_local.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 
 //
 void main() async {
@@ -26,12 +29,14 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   await GetStorage.init();
   tz.initializeTimeZones();
+  await initializeDateFormatting();
+
   /// get device language
   final String defaultLocale = Platform.localeName.substring(0, 2);
   defaultLang = defaultLocale;
-  isDarkMode = GetStorage().read('isDarkMode')??false;
-  disableNotifications = GetStorage().read('disableNotifications')??false;
-  lang = GetStorage().read('lang')??(defaultLang=='ar'?'ar':'en');
+  isDarkMode = GetStorage().read('isDarkMode') ?? false;
+  disableNotifications = GetStorage().read('disableNotifications') ?? false;
+  lang = GetStorage().read('lang') ?? (defaultLang == 'ar' ? 'ar' : 'en');
   await Hive.initFlutter();
   Hive.registerAdapter(TaskModelAdapter());
   tasksBox = await Hive.openBox('tasksBox');
@@ -47,13 +52,15 @@ void main() async {
 
   runApp(BlocProvider(
     create: (BuildContext context) => TodoCubit()..getAllTasks(),
-      child: BlocConsumer<TodoCubit,TodoStates>(
-        listener: (BuildContext context, state) {},
-        builder: (BuildContext context, state) {
-          TodoCubit cubit = TodoCubit.get(context);
-          return MyApp(cubit: cubit,);
-        },
-      ),
+    child: BlocConsumer<TodoCubit, TodoStates>(
+      listener: (BuildContext context, state) {},
+      builder: (BuildContext context, state) {
+        TodoCubit cubit = TodoCubit.get(context);
+        return MyApp(
+          cubit: cubit,
+        );
+      },
+    ),
   ));
 }
 
@@ -66,7 +73,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -83,7 +89,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -94,19 +99,37 @@ class _MyAppState extends State<MyApp> {
       builder: (context, state) {
         //TodoCubit cubit = TodoCubit.get(context);
         return Sizer(
-          builder: (BuildContext context, Orientation orientation, DeviceType deviceType) {
+          builder: (BuildContext context, Orientation orientation,
+              DeviceType deviceType) {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
               useInheritedMediaQuery: true,
               home: Directionality(
                   textDirection:
-                  languageFun(ar: TextDirection.rtl, en: TextDirection.ltr),
+                      languageFun(ar: TextDirection.rtl, en: TextDirection.ltr),
                   child: const OpeningScreen()),
               theme: lightTheme,
               darkTheme: darkTheme,
-              themeMode: isDarkMode!?ThemeMode.dark:ThemeMode.light,
+              themeMode: isDarkMode! ? ThemeMode.dark : ThemeMode.light,
               translations: Translation(),
               locale: Locale(languageFun(ar: 'ar', en: 'en')),
+              localeResolutionCallback: (locale, supportedLocales) {
+                for (var supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale?.languageCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocales.first;
+              },
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate
+              ],
+              supportedLocales: const [
+                Locale('en'),
+                Locale('ar'),
+              ],
               fallbackLocale: const Locale('en'),
             );
           },

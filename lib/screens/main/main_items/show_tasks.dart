@@ -31,8 +31,9 @@ class TaskText extends StatelessWidget {
               color: Colors.grey,
               letterSpacing: 0.5,
               fontFamily: "Avenir-Medium",
-              decoration:
-                  isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+              decoration: isCompleted
+                  ? TextDecoration.lineThrough
+                  : TextDecoration.none,
               decorationColor: pink,
             )),
         SizedBox(
@@ -40,9 +41,10 @@ class TaskText extends StatelessWidget {
         ),
         Text(
           text,
-          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              decoration:
-              isCompleted ? TextDecoration.lineThrough : TextDecoration.none,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              decoration: isCompleted
+                  ? TextDecoration.lineThrough
+                  : TextDecoration.none,
               decorationColor: pink,
               decorationThickness: 2,
               fontSize: 16.5.sp,
@@ -68,7 +70,9 @@ class TaskInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (index == 0)
-          SizedBox(height: 1.5.h,),
+          SizedBox(
+            height: 1.5.h,
+          ),
         TaskText(
             text: "${task.name}",
             dateTime: cubit.scheduleTaskIndex != 2
@@ -77,7 +81,9 @@ class TaskInfo extends StatelessWidget {
                     .dateFormat(task.dateTime!.toString())!['date']!,
             isCompleted: task.isCompleted!),
         if (index == tasksBox!.length - 1)
-          SizedBox(height: 8.5.h,)
+          SizedBox(
+            height: 8.5.h,
+          )
       ],
     );
   }
@@ -97,17 +103,14 @@ class ShowTasks extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.grey.withOpacity(0.08),
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.sp)),
-              topRight: Radius.circular(languageFun(ar: 10.sp, en: 0.0))
-            )
-        ),
+                topLeft: Radius.circular(languageFun(ar: 0.0, en: 10.sp)),
+                topRight: Radius.circular(languageFun(ar: 10.sp, en: 0.0)))),
         child: Padding(
             padding: EdgeInsets.only(
                 right: languageFun(ar: 4.2.w, en: 3.5.w),
                 left: languageFun(ar: 3.5.w, en: 4.2.w),
                 bottom: 1.4.h,
-                top: 1.4.h
-            ),
+                top: 1.4.h),
             child: cubit.allTasks[cubit.scheduleTaskIndex].isNotEmpty
                 ? ListView.separated(
                     shrinkWrap: true,
@@ -149,7 +152,9 @@ class DeleteButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         if (index == 0)
-          SizedBox(height: 1.4.h,),
+          SizedBox(
+            height: 1.4.h,
+          ),
         GestureDetector(
             onTap: () {
               cubit.deleteTask(index: index, task: task);
@@ -161,7 +166,9 @@ class DeleteButton extends StatelessWidget {
               color: Colors.red,
             )),
         if (index == tasksBox!.length - 1)
-           SizedBox(height: 8.4.h,)
+          SizedBox(
+            height: 8.4.h,
+          )
       ],
     );
   }

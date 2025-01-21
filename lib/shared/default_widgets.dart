@@ -1,11 +1,15 @@
+import 'package:day_night_time_picker/day_night_time_picker.dart';
 import 'package:day_night_time_picker/lib/constants.dart';
 import 'package:day_night_time_picker/lib/daynight_timepicker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import 'package:todo/cubit/cubit.dart';
 import 'package:todo/shared/constants.dart';
 import 'package:todo/styles/icons_broken.dart';
+
+import 'app_functions.dart';
 
 class DefaultBackButton extends StatelessWidget {
   const DefaultBackButton({Key? key}) : super(key: key);
@@ -13,90 +17,107 @@ class DefaultBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: (){Get.back();},
-      icon: Icon(
-        languageFun(ar: IconBroken.Arrow___Right_2, en: IconBroken.Arrow___Left_2)
-      ),
+      onPressed: () {
+        Get.back();
+      },
+      icon: Icon(languageFun(
+          ar: IconBroken.Arrow___Right_2, en: IconBroken.Arrow___Left_2)),
     );
   }
 }
 
-
-void timePicker(context,cubit){
+void timePicker(BuildContext context, TodoCubit cubit) {
   Navigator.of(context).push(
     showPicker(
       context: context,
       cancelText: "cancel".tr,
       okText: 'ok'.tr,
-      accentColor: !isDarkMode!?Colors.black87:Colors.white,
-      unselectedColor: !isDarkMode!?Colors.black26:Colors.white30,
-      value: TimeOfDay.now(),
-      onChange: (value){},
+      accentColor: !isDarkMode! ? Colors.black87 : Colors.white,
+      unselectedColor: !isDarkMode! ? Colors.black26 : Colors.white30,
+      value: Time(hour: TimeOfDay.now().hour, minute: TimeOfDay.now().minute),
+      onChange: (value) {},
+      isArabic: languageFun(ar: true, en: false),
+      // minHour: 20,
+      // minHour: TimeOfDay.now().hour.toDouble(),
+      // minMinute: TimeOfDay.now().minute.toDouble(),
+      // maxHour: 20,
+      // maxHour: 23.9,
+      // maxMinute: 59,
+      // sta
+      // isArabic: languageFun(ar: true, en: false),
       //iosStylePicker: true,
-      minuteInterval: MinuteInterval.ONE,
+      // minuteInterval: MinuteInterval.ONE,
       // Optional onChange to receive value as DateTime
       onChangeDateTime: (DateTime dateTime) {
+        if (dateTime.isBefore(DateTime.now()) && cubit.isToday) {
+          print("time should be after current time");
+          showSnackBar(
+            context: context,
+            title: 'warning'.tr,
+            content: 'incorrectTime'.tr,
+            color: Colors.black87,
+            fontColor: Colors.white,
+            icon: IconBroken.Danger,
+          );
+        }
         // print(dateTime.millisecondsSinceEpoch);
         cubit.setTaskTime(dateTime);
       },
-      okStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-        fontSize: 16,
-        color: !isDarkMode!?Colors.black87:Colors.white,
-      ),
-      cancelStyle: Theme.of(context).textTheme.bodyText1!.copyWith(
-        fontSize: 16,
-        color: !isDarkMode!?Colors.black87:Colors.white,
-      ),
+      okStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+            fontSize: 16,
+            color: !isDarkMode! ? Colors.black87 : Colors.white,
+          ),
+      cancelStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+            fontSize: 16,
+            color: !isDarkMode! ? Colors.black87 : Colors.white,
+          ),
     ),
   );
 }
 
-SnackbarController showSnackBar ({
+SnackbarController showSnackBar({
   @required BuildContext? context,
   @required String? title,
   @required String? content,
   @required Color? color,
   @required Color? fontColor,
   @required IconData? icon,
-}){
-  return Get.snackbar(
-      title!,
-      content!,
-      titleText: Text(title,
-        style: Theme.of(context!).textTheme.bodyText1!.copyWith(
-            fontSize: 18,
-            color: fontColor!
-        ),
+}) {
+  return Get.snackbar(title!, content!,
+      titleText: Text(
+        title,
+        style: Theme.of(context!)
+            .textTheme
+            .titleLarge!
+            .copyWith(fontSize: 18, color: fontColor!),
       ),
       messageText: Text(
         content,
-        style: Theme.of(context).textTheme.bodyText1!.copyWith(
-            fontSize: 15,
-            color: fontColor
-        ),
+        style: Theme.of(context)
+            .textTheme
+            .titleLarge!
+            .copyWith(fontSize: 15, color: fontColor),
       ),
       icon: Icon(
         icon!,
         color: fontColor,
-        size: 25,),
+        size: 25,
+      ),
       duration: const Duration(seconds: 3),
       snackPosition: SnackPosition.TOP,
       backgroundColor: color!,
       borderRadius: 10,
-      margin: const EdgeInsets.symmetric(vertical: 5,horizontal: 7)
-    //padding: const EdgeInsets.all(0)
-  );
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 7)
+      //padding: const EdgeInsets.all(0)
+      );
 }
-
-
-
 
 class NoLeadingSpaceFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue,
-      TextEditingValue newValue,
-      ) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     if (newValue.text.startsWith(' ')) {
       final String trimedText = newValue.text.trimLeft();
 
@@ -114,7 +135,8 @@ class NoLeadingSpaceFormatter extends TextInputFormatter {
 
 class DefaultProgressIndicator extends StatelessWidget {
   final IconData icon;
-  const DefaultProgressIndicator({Key? key, required this.icon}) : super(key: key);
+  const DefaultProgressIndicator({Key? key, required this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +145,15 @@ class DefaultProgressIndicator extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GlowingProgressIndicator(
-            child: Icon(icon,size: 35,color: Colors.grey,),
+            child: Icon(
+              icon,
+              size: 35,
+              color: Colors.grey,
+            ),
           ),
-          const SizedBox(height: 6,),
+          const SizedBox(
+            height: 6,
+          ),
         ],
       ),
     );
@@ -139,12 +167,16 @@ class DefaultLinerIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 5,),
+        const SizedBox(
+          height: 5,
+        ),
         LinearProgressIndicator(
           color: Colors.blue.withOpacity(0.3),
           backgroundColor: Colors.white,
         ),
-        const SizedBox(height: 5,),
+        const SizedBox(
+          height: 5,
+        ),
       ],
     );
   }
@@ -154,13 +186,15 @@ class DefaultButtonLoader extends StatelessWidget {
   final double size;
   final double width;
   final Color color;
-  const DefaultButtonLoader({Key? key, required this.size,
-    required this.width, required this.color}) : super(key: key);
+  const DefaultButtonLoader(
+      {Key? key, required this.size, required this.width, required this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size, height: size,
+      width: size,
+      height: size,
       child: CircularProgressIndicator(
         color: color,
         strokeWidth: width,
@@ -176,22 +210,28 @@ class DefaultElevatedButton extends StatelessWidget {
   final double height;
   final double width;
   final onPressed;
-  const DefaultElevatedButton({Key? key, required this.child, required this.color, required this.rounded,
-    required this.height, required this.width, required this.onPressed}) : super(key: key);
+  const DefaultElevatedButton(
+      {Key? key,
+      required this.child,
+      required this.color,
+      required this.rounded,
+      required this.height,
+      required this.width,
+      required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed:onPressed,
-      child:child,
+      onPressed: onPressed,
+      child: child,
       style: ElevatedButton.styleFrom(
           elevation: 0,
-          primary:color,
+          backgroundColor: color,
           shape: RoundedRectangleBorder(
-            borderRadius:BorderRadius.circular(rounded),
+            borderRadius: BorderRadius.circular(rounded),
           ),
-          minimumSize: Size(width,height)
-      ),
+          minimumSize: Size(width, height)),
     );
   }
 }
@@ -204,21 +244,28 @@ class DefaultOutLinedButton extends StatelessWidget {
   final double width;
   final onPressed;
   Color? borderColor;
-  DefaultOutLinedButton({Key? key, required this.child, required this.rounded,
-    required this.height, required this.width, required this.onPressed,this.borderColor}) : super(key: key);
+  DefaultOutLinedButton(
+      {Key? key,
+      required this.child,
+      required this.rounded,
+      required this.height,
+      required this.width,
+      required this.onPressed,
+      this.borderColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed:onPressed,
-      child:child,
+      onPressed: onPressed,
+      child: child,
       style: OutlinedButton.styleFrom(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius:BorderRadius.circular(rounded),
+          borderRadius: BorderRadius.circular(rounded),
         ),
-        minimumSize: Size(width,height),
-        side: BorderSide(color: borderColor??const Color(0xFF000000)),
+        minimumSize: Size(width, height),
+        side: BorderSide(color: borderColor ?? const Color(0xFF000000)),
       ),
     );
   }
@@ -227,7 +274,11 @@ class DefaultOutLinedButton extends StatelessWidget {
 class NoItemsFounded extends StatelessWidget {
   final String text;
   final Widget widget;
-  const NoItemsFounded({Key? key, required this.text, required this.widget,}) : super(key: key);
+  const NoItemsFounded({
+    Key? key,
+    required this.text,
+    required this.widget,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -237,11 +288,16 @@ class NoItemsFounded extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             widget,
-            const SizedBox(height: 15,),
-            Text(text,style: Theme.of(context).textTheme.bodyText1!.copyWith(
-              color: Colors.grey[400],
-              fontSize: 22,
-            ),)
+            const SizedBox(
+              height: 15,
+            ),
+            Text(
+              text,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Colors.grey[400],
+                    fontSize: 22,
+                  ),
+            )
           ],
         ),
       ),
@@ -275,10 +331,8 @@ class DefaultSeparator extends StatelessWidget {
   }
 }
 
-
-
 //ignore: must_be_immutable
-class DefaultTextFormFiled extends StatelessWidget{
+class DefaultTextFormFiled extends StatelessWidget {
   final TextEditingController? controller;
   final Color? textColor;
   final double textSize;
@@ -298,9 +352,8 @@ class DefaultTextFormFiled extends StatelessWidget{
   double? cursorHeight;
   bool? isPassword;
 
-
-
-  DefaultTextFormFiled({Key? key,
+  DefaultTextFormFiled({
+    Key? key,
     required this.controller,
     required this.textColor,
     required this.inputType,
@@ -319,19 +372,18 @@ class DefaultTextFormFiled extends StatelessWidget{
     this.widthPadding,
     this.suffix,
     this.prefix,
-  }
-      ) : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       inputFormatters: formatters,
-      autofocus: autoFocus??false,
+      autofocus: autoFocus ?? false,
       controller: controller,
       cursorColor: focusBorder,
       validator: (value) {
         if (value!.isEmpty) {
-          if(validateText!=null) {
+          if (validateText != null) {
             return validateText!;
           } else {
             return "can't be empty";
@@ -339,20 +391,19 @@ class DefaultTextFormFiled extends StatelessWidget{
         }
         return null;
       },
-      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-          color: textColor,
-          fontSize: textSize
-      ),
+      style: Theme.of(context)
+          .textTheme
+          .titleLarge!
+          .copyWith(color: textColor, fontSize: textSize),
       cursorHeight: cursorHeight,
       keyboardType: inputType,
-      obscureText: isPassword==null?false:isPassword!,
+      obscureText: isPassword == null ? false : isPassword!,
       decoration: InputDecoration(
         hintText: hint!,
-        hintStyle: TextStyle(
-          color: hintColor
-        ),
-        contentPadding: EdgeInsets.symmetric(vertical: heightPadding==null?18:heightPadding!,
-        horizontal: widthPadding==null?10:widthPadding!),
+        hintStyle: TextStyle(color: hintColor),
+        contentPadding: EdgeInsets.symmetric(
+            vertical: heightPadding == null ? 18 : heightPadding!,
+            horizontal: widthPadding == null ? 10 : widthPadding!),
         prefixIcon: prefix,
         suffixIcon: suffix,
         focusedErrorBorder: OutlineInputBorder(
@@ -386,7 +437,6 @@ class DefaultTextFormFiled extends StatelessWidget{
 
 //ignore: must_be_immutable
 class DefaultTextFiled extends StatelessWidget {
-
   final TextEditingController controller;
   final String hint;
   final double hintSize;
@@ -400,10 +450,21 @@ class DefaultTextFiled extends StatelessWidget {
   var onSubmitted;
   var onChanged;
 
-  DefaultTextFiled({Key? key, required this.controller, required this.hint,
-    required this.hintSize, required this.height, required this.suffix,
-    required this.focusBorder, required this.border,this.validate,
-    this.onChanged,this.onSubmitted, required this.rounded,this.obscure}) : super(key: key);
+  DefaultTextFiled(
+      {Key? key,
+      required this.controller,
+      required this.hint,
+      required this.hintSize,
+      required this.height,
+      required this.suffix,
+      required this.focusBorder,
+      required this.border,
+      this.validate,
+      this.onChanged,
+      this.onSubmitted,
+      required this.rounded,
+      this.obscure})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -411,18 +472,16 @@ class DefaultTextFiled extends StatelessWidget {
       inputFormatters: [NoLeadingSpaceFormatter()],
       cursorColor: focusBorder,
       controller: controller,
-      onSubmitted: onSubmitted??(value){},
-      onChanged: onChanged??(value){},
-      obscureText: obscure??false,
-      decoration:  InputDecoration(
-        errorText: validate==true?null:"$hint ${"notEmpty".tr}",
+      onSubmitted: onSubmitted ?? (value) {},
+      onChanged: onChanged ?? (value) {},
+      obscureText: obscure ?? false,
+      decoration: InputDecoration(
+        errorText: validate == true ? null : "$hint ${"notEmpty".tr}",
         hintText: hint,
         hintStyle: TextStyle(
           fontSize: hintSize,
         ),
-        contentPadding: EdgeInsets.symmetric(
-            vertical: height,
-            horizontal: 15),
+        contentPadding: EdgeInsets.symmetric(vertical: height, horizontal: 15),
         suffixIcon: suffix,
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(rounded),

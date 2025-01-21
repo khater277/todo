@@ -23,43 +23,39 @@ class NotificationsShowTasks extends StatelessWidget {
           decoration: BoxDecoration(
               color: Colors.grey.withOpacity(0.08),
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.sp),
-                topRight: Radius.circular(20.sp)
-              )),
+                  topLeft: Radius.circular(20.sp),
+                  topRight: Radius.circular(20.sp))),
           child: Padding(
             padding: EdgeInsets.only(
                 left: languageFun(ar: 0.0, en: 5.55.w),
                 right: languageFun(ar: 5.55.w, en: 0.0),
-                bottom: 2.8.h
-            ),
+                bottom: 2.8.h),
             child: cubit.notificationTasks.isNotEmpty
-                ?
-            ListView.builder(
-                shrinkWrap: true,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) {
-                  TaskModel task = cubit.notificationTasks[index];
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 2.1.h),
-                    child: Column(
-                      children: [
-                        // Text("${cubit.notificationTasks.length}"),
-                        NotificationsTaskInfo(
-                            cubit: cubit, index: index, task: task),
-                      ],
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      TaskModel task = cubit.notificationTasks[index];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 2.1.h),
+                        child: Column(
+                          children: [
+                            // Text("${cubit.notificationTasks.length}"),
+                            NotificationsTaskInfo(
+                                cubit: cubit, index: index, task: task),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: cubit.notificationTasks.length)
+                : NoItemsFounded(
+                    text: "noNotifications".tr,
+                    widget: Icon(
+                      IconBroken.Notification,
+                      size: 50.sp,
+                      color: Colors.grey[500],
                     ),
-                  );
-                },
-                itemCount: cubit.notificationTasks.length)
-                :
-            NoItemsFounded(
-              text: "noNotifications".tr,
-              widget: Icon(
-                IconBroken.Notification,
-                size: 50.sp,
-                color: Colors.grey[500],
-              ),
-            ),
+                  ),
           ),
         ),
       ),
@@ -78,17 +74,15 @@ class NotificationsTaskText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime todayDate =
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
-    DateTime todayDate = DateTime(DateTime.now().year,DateTime.now().month,
-        DateTime.now().day);
+    DateTime taskDayDate =
+        DateTime(task.dateTime!.year, task.dateTime!.month, task.dateTime!.day);
 
-    DateTime taskDayDate = DateTime(task.dateTime!.year,task.dateTime!.month,
-        task.dateTime!.day);
-
-    String date = todayDate==taskDayDate
+    String date = todayDate == taskDayDate
         ? "Today at ${DateFormatter().time(task.dateTime!.toString())}"
-        : DateFormatter()
-        .dateFormat(task.dateTime!.toString())!['date']!;
+        : DateFormatter().dateFormat(task.dateTime!.toString())!['date']!;
 
     return Row(
       children: [
@@ -115,7 +109,7 @@ class NotificationsTaskText extends StatelessWidget {
               ),
               Text(
                 task.name!,
-                style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     decoration: task.isCompleted!
                         ? TextDecoration.lineThrough
                         : TextDecoration.none,
@@ -128,10 +122,14 @@ class NotificationsTaskText extends StatelessWidget {
           ),
         ),
         IconButton(
-            onPressed: (){
+            onPressed: () {
               cubit.removeFromNotifications(index: index, task: task);
             },
-            icon: Icon(IconBroken.Delete,size: 16.66.sp,color: Colors.red,))
+            icon: Icon(
+              IconBroken.Delete,
+              size: 16.66.sp,
+              color: Colors.red,
+            ))
       ],
     );
   }

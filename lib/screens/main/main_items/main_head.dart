@@ -14,9 +14,8 @@ class HomeHead extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: languageFun(ar: 2.w, en: 6.w),
-        right: languageFun(ar: 6.w, en: 2.w)
-      ),
+          left: languageFun(ar: 2.w, en: 6.w),
+          right: languageFun(ar: 6.w, en: 2.w)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -24,17 +23,17 @@ class HomeHead extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: Row(
               children: [
-                Text("tasks".tr,
+                Text(
+                  "tasks".tr,
                   style: Theme.of(context)
                       .textTheme
-                      .bodyText2!
+                      .titleMedium!
                       .copyWith(fontSize: 37.sp),
-
                 ),
                 const Spacer(),
                 IconButton(
-                    onPressed: (){
-                      Get.to(()=>const NotificationsScreen());
+                    onPressed: () {
+                      Get.to(() => const NotificationsScreen());
                       // NotificationsHelper.showNotification();
                       //NotificationsHelper.zonedScheduleNotification();
                     },
@@ -45,7 +44,7 @@ class HomeHead extends StatelessWidget {
                           IconBroken.Notification,
                           size: 20.sp,
                         ),
-                        if(cubit.notificationTasks.isNotEmpty)
+                        if (cubit.notificationTasks.isNotEmpty)
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 0.8.w),
                             child: CircleAvatar(

@@ -8,7 +8,7 @@ class WelcomeText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
+      padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -16,14 +16,14 @@ class WelcomeText extends StatelessWidget {
             "hello".tr,
             style: Theme.of(context)
                 .textTheme
-                .bodyText1!
+                .titleLarge!
                 .copyWith(color: Colors.white, fontSize: 27.sp),
           ),
           Text(
             "welcome".tr,
             style: Theme.of(context)
                 .textTheme
-                .bodyText1!
+                .titleLarge!
                 .copyWith(color: Colors.white, fontSize: 27.sp),
           ),
         ],

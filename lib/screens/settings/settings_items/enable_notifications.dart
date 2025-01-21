@@ -12,11 +12,10 @@ class DisableNotifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text("disableNotifications".tr,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText1!
-              .copyWith(fontSize: 15.sp),
+        Text(
+          "disableNotifications".tr,
+          style:
+              Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 15.sp),
         ),
         const Spacer(),
         Switch(
@@ -25,10 +24,9 @@ class DisableNotifications extends StatelessWidget {
             inactiveTrackColor: Colors.grey.withOpacity(0.5),
             activeColor: pink.withOpacity(0.8),
             inactiveThumbColor: Colors.grey,
-            onChanged: (value){
+            onChanged: (value) {
               cubit.disableAppNotifications();
-            }
-        ),
+            }),
       ],
     );
   }

@@ -22,43 +22,29 @@ class ReceivedNotification {
   final String? payload;
 }
 
-
-class NotificationsHelper{
-
+class NotificationsHelper {
   /// get instance from local notifications
   static FlutterLocalNotificationsPlugin notifications =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
-  static BehaviorSubject<ReceivedNotification> didReceiveLocalNotificationSubject =
-  BehaviorSubject<ReceivedNotification>();
+  static BehaviorSubject<ReceivedNotification>
+      didReceiveLocalNotificationSubject =
+      BehaviorSubject<ReceivedNotification>();
 
   static BehaviorSubject<String?> selectNotificationSubject =
-  BehaviorSubject<String?>();
-
+      BehaviorSubject<String?>();
 
   static const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('@mipmap/ic_launcher',);
+      AndroidInitializationSettings(
+    '@mipmap/ic_launcher',
+  );
 
-  static IOSInitializationSettings initializationSettingsIOS =
-  IOSInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false,
-      onDidReceiveLocalNotification: (
-          int id,
-          String? title,
-          String? body,
-          String? payload,
-          ) async {
-        didReceiveLocalNotificationSubject.add(
-          ReceivedNotification(
-            id: id,
-            title: title,
-            body: body,
-            payload: payload,
-          ),
-        );
-      });
+  static DarwinInitializationSettings initializationSettingsIOS =
+      DarwinInitializationSettings(
+    requestAlertPermission: false,
+    requestBadgePermission: false,
+    requestSoundPermission: false,
+  );
 
   static InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
@@ -67,15 +53,32 @@ class NotificationsHelper{
 
   static String? selectedNotificationPayload;
 
-  static void init()async{
-    await notifications.initialize(initializationSettings,
-        onSelectNotification: (String? payload) async {
-          if (payload != null) {
-            debugPrint('notification payload: $payload');
-          }
-          selectedNotificationPayload = payload;
-          selectNotificationSubject.add(payload);
-        });
+  static void init() async {
+    await notifications.initialize(
+      initializationSettings,
+      //     onSelectNotification: (String? payload) async {
+
+      //   selectedNotificationPayload = payload;
+      //   selectNotificationSubject.add(payload);
+      // },
+      onDidReceiveNotificationResponse:
+          (NotificationResponse notificationResponse) {
+        switch (notificationResponse.notificationResponseType) {
+          case NotificationResponseType.selectedNotification:
+            selectNotificationSubject.add(notificationResponse.payload);
+            // _selectNotificationStream.addToStream(notificationResponse.payload);
+            break;
+          case NotificationResponseType.selectedNotificationAction:
+            const String navigationActionId = 'id_3';
+            if (notificationResponse.actionId == navigationActionId) {
+              selectNotificationSubject.add(notificationResponse.payload);
+              // _selectNotificationStream
+              //     .addToStream(notificationResponse.payload);
+            }
+            break;
+        }
+      },
+    );
   }
 
   static void configureDidReceiveLocalNotificationSubject(context) {
@@ -105,36 +108,37 @@ class NotificationsHelper{
   }
 
   static void configureSelectNotificationSubject(TodoCubit cubit) {
-    NotificationsHelper.selectNotificationSubject.stream.listen((String? payload) async {
+    NotificationsHelper.selectNotificationSubject.stream
+        .listen((String? payload) async {
       debugPrint("$payload");
       cubit.getNotificationTasks();
-        Get.to(()=>const NotificationsScreen());
+      Get.to(() => const NotificationsScreen());
     });
   }
 
   static Future<void> showNotification() async {
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
-    AndroidNotificationDetails('your channel id', 'your channel name',
-        channelDescription: 'your channel description',
-        importance: Importance.max,
-        priority: Priority.high,
-        ticker: 'ticker',
-
+        AndroidNotificationDetails(
+      'your channel id',
+      'your channel name',
+      channelDescription: 'your channel description',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
     );
     const NotificationDetails platformChannelSpecifics =
-    NotificationDetails(android: androidPlatformChannelSpecifics);
+        NotificationDetails(android: androidPlatformChannelSpecifics);
     await notifications.show(
         0, 'plain title', 'plain body', platformChannelSpecifics,
         payload: 'item x');
   }
 
   static Future<void> zonedScheduleNotification({
-  required BuildContext context,
-  required TaskModel task,
-  required int id,
-}) async {
-    tz.TZDateTime tzDate = tz.TZDateTime
-    .from(task.dateTime!, tz.local);
+    required BuildContext context,
+    required TaskModel task,
+    required int id,
+  }) async {
+    tz.TZDateTime tzDate = tz.TZDateTime.from(task.dateTime!, tz.local);
     await notifications.zonedSchedule(
         id,
         'Hey there',
@@ -147,13 +151,11 @@ class NotificationsHelper{
                 importance: Importance.max,
                 priority: Priority.high,
                 ticker: 'ticker',
-                icon: "app_icon"
-            )
-        ),
+                icon: "app_icon")),
         payload: 'notifications',
-        androidAllowWhileIdle: true,
+        // androidAllowWhileIdle: true,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime);
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
-
 }

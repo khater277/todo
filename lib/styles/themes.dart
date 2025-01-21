@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo/shared/constants.dart';
 
-ThemeData darkTheme=ThemeData(
+ThemeData darkTheme = ThemeData(
     primarySwatch: GenerateMaterialColor().generateMaterialColor(Colors.white),
     fontFamily: 'SF-Pro-Display',
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: Colors.white70,
-        foregroundColor: Colors.black,
+      backgroundColor: Colors.white70,
+      foregroundColor: Colors.black,
       elevation: 0,
       shape: RoundedRectangleBorder(),
     ),
@@ -15,22 +15,22 @@ ThemeData darkTheme=ThemeData(
       color: Colors.white,
     ),
     textTheme: TextTheme(
-        bodyText1:const TextStyle(
+        // titleLarge: ,
+        titleLarge: const TextStyle(
           color: Colors.white,
           //fontWeight: FontWeight.w600,
           fontFamily: "Avenir-Medium",
           fontSize: 20,
         ),
-        bodyText2: const TextStyle(
+        // titleMedium: ,
+        titleMedium: const TextStyle(
           color: Colors.white,
           fontFamily: "Avenir-Black",
           //fontWeight: FontWeight.w200,
           fontSize: 20,
         ),
-        caption: TextStyle(
-            color: Colors.white.withOpacity(0.5)
-        )
-    ),
+        // titleSmall: ,
+        titleSmall: TextStyle(color: Colors.white.withOpacity(0.5))),
     scaffoldBackgroundColor: const Color(0xff333739),
     appBarTheme: const AppBarTheme(
         iconTheme: IconThemeData(
@@ -47,12 +47,10 @@ ThemeData darkTheme=ThemeData(
             fontFamily: 'SF-Pro-Display',
             color: Colors.white,
             fontSize: 20,
-            fontWeight: FontWeight.bold
-        ),
+            fontWeight: FontWeight.bold),
         actionsIconTheme: IconThemeData(
           color: Colors.white,
-        )
-    ),
+        )),
     cardColor: const Color(0xff333739),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       showSelectedLabels: true,
@@ -60,12 +58,11 @@ ThemeData darkTheme=ThemeData(
       backgroundColor: const Color(0xff333739),
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Colors.grey[500],
-    )
-);
+    ));
 
-ThemeData lightTheme=ThemeData(
-  primarySwatch: GenerateMaterialColor()
-      .generateMaterialColor(Colors.black87),
+ThemeData lightTheme = ThemeData(
+    primarySwatch:
+        GenerateMaterialColor().generateMaterialColor(Colors.black87),
     scaffoldBackgroundColor: Colors.white,
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Colors.black87,
@@ -77,13 +74,13 @@ ThemeData lightTheme=ThemeData(
       color: Colors.black,
     ),
     textTheme: const TextTheme(
-      bodyText1:TextStyle(
+      titleLarge: TextStyle(
         color: Colors.black87,
         //fontWeight: FontWeight.w600,
         fontFamily: "Avenir-Medium",
         fontSize: 20,
       ),
-      bodyText2: TextStyle(
+      titleMedium: TextStyle(
         color: Colors.black87,
         fontFamily: "Avenir-Black",
         //fontWeight: FontWeight.w200,
@@ -105,17 +102,14 @@ ThemeData lightTheme=ThemeData(
             fontFamily: 'SF-Pro-Display',
             color: Colors.black,
             fontSize: 20,
-            fontWeight: FontWeight.bold
-        ),
+            fontWeight: FontWeight.bold),
         actionsIconTheme: IconThemeData(
           color: Colors.black,
-        )
-    ),
+        )),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       showSelectedLabels: true,
       showUnselectedLabels: true,
       backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Colors.grey[500],
-    )
-);
+    ));
